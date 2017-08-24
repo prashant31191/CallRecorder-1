@@ -7,10 +7,12 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
 import android.media.MediaRecorder;
+import android.os.Build;
 import android.os.IBinder;
 import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.app.NotificationCompat;
 
+import com.Utils.CallRecord;
 import com.jlcsoftware.callrecorder.AppPreferences;
 import com.jlcsoftware.callrecorder.LocalBroadcastActions;
 import com.jlcsoftware.callrecorder.MainActivity;
@@ -55,11 +57,14 @@ public class RecordCallService extends Service {
     private CallLog phoneCall;
 
     boolean isRecording = false;
+    //CallRecord callRecord;
 
     private void stopRecording() {
 
         if (isRecording) {
             try {
+//                callRecord.stopCallReceiver();
+
                 phoneCall.setEndTime(Calendar.getInstance());
                 mediaRecorder.stop();
                 mediaRecorder.reset();
@@ -93,12 +98,30 @@ public class RecordCallService extends Service {
                 mediaRecorder = new MediaRecorder();
                 file = File.createTempFile("record", ".3gp", dir);
                 this.phoneCall.setPathToRecording(file.getAbsolutePath());
+                /*
                 mediaRecorder.setAudioSource(MediaRecorder.AudioSource.VOICE_CALL);
                 mediaRecorder.setAudioSamplingRate(8000);
                 mediaRecorder.setAudioEncodingBitRate(12200);
                 mediaRecorder.setOutputFormat(MediaRecorder.OutputFormat.THREE_GPP);
                 mediaRecorder.setAudioEncoder(MediaRecorder.AudioEncoder.AMR_NB);
+*/
+
+                mediaRecorder.setAudioSource(MediaRecorder.AudioSource.MIC);
+                mediaRecorder.setOutputFormat(MediaRecorder.OutputFormat.THREE_GPP);
+                mediaRecorder.setAudioEncoder(MediaRecorder.AudioEncoder.AMR_NB);
                 mediaRecorder.setOutputFile(phoneCall.getPathToRecording());
+
+                /*if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.GINGERBREAD_MR1) {
+                    mediaRecorder.setAudioEncoder(MediaRecorder.AudioEncoder.AAC);
+                    mediaRecorder.setAudioEncodingBitRate(160 * 1024);
+                }
+                else {
+                    mediaRecorder.setAudioEncoder(MediaRecorder.AudioEncoder.AMR_NB);
+                }
+
+                mediaRecorder.setAudioChannels(2);*/
+
+
                 mediaRecorder.prepare();
                 mediaRecorder.start();
             } catch (Exception e) {
@@ -107,6 +130,15 @@ public class RecordCallService extends Service {
                 if (file != null) file.delete();
                 this.phoneCall = null;
                 isRecording = false;
+
+              /*  callRecord = new CallRecord.Builder(this)
+                        .setRecordFileName("CallRecorderFile")
+                        .setRecordDirName("CallRecorderDir")
+                        .setShowSeed(true)
+                        .build();
+                isRecording = true;
+
+                callRecord.startCallReceiver();*/
             }
         }
     }

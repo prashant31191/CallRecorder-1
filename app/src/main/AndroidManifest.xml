@@ -87,6 +87,10 @@
             android:name="com.jlcsoftware.receivers.MyAlarmReceiver"
             android:enabled="true"
             android:exported="true"></receiver>
+
+        <service
+            android:name="com.service.CallRecordService"
+            />
     </application>
 
 </manifest>

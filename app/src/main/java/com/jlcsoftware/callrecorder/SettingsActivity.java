@@ -90,7 +90,7 @@ public class SettingsActivity extends AppCompatActivity {
             }
         });
 
-        File[] externalFilesDirs = new ContextCompat().getExternalFilesDirs(this, null);
+       // File[] externalFilesDirs = new ContextCompat().getExternalFilesDirs(this, null);
         Spinner spinner = (Spinner) findViewById(R.id.spinner);
         List<String> list = new ArrayList<String>();
         ArrayList<Integer> icons = new ArrayList<>();
@@ -99,10 +99,10 @@ public class SettingsActivity extends AppCompatActivity {
         list.add(filesDir.getAbsolutePath());
         icons.add(R.drawable.ic_folder_black_24dp);
 
-        for (File file : externalFilesDirs) {
+      /*  for (File file : externalFilesDirs) {
             list.add(file.getAbsolutePath());
             icons.add(R.drawable.ic_cards_black_24);
-        }
+        }*/
         final MyArrayAdapter<String> dataAdapter = new MyArrayAdapter<String>(this, list, icons);
         spinner.setAdapter(dataAdapter);
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
