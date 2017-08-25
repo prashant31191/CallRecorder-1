@@ -9,11 +9,6 @@ import android.provider.ContactsContract;
 import com.jlcsoftware.database.Database;
 import com.jlcsoftware.database.Whitelist;
 
-/**
- * Created by Jeff on 06-May-16.
- *
- * A whilelisted contact
- */
 public class WhitelistRecord {
 
     Whitelist whitelist;

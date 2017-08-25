@@ -12,11 +12,6 @@ import android.provider.ContactsContract;
 import java.io.File;
 import java.util.ArrayList;
 
-/**
- * Created by Jeff on 06-May-16.
- * <p/>
- * Our SQLlite database
- */
 public class Database extends SQLiteOpenHelper {
 
     public static String NAME = "callRecorder";

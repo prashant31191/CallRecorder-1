@@ -1,24 +1,4 @@
 package com.jlcsoftware.widget.adapter;
-
-/**
- * Created by Jeff on 19-May-16.
- * <p/>
- *
- * Original: https://github.com/afollestad/sectioned-recyclerview
- *
- * Any modifications are mine
- *
- *
- * Usage:
- * Layout Manager
- * If you're using a LinearLayoutManager, you're all set. If you're using a GridLayoutManager, you need to tell the adapter:
- * GridLayoutManager manager = // ...
- * adapter.setLayoutManager(manager);
- * This is vital to getting headers to span all columns.
- *
- *
- */
-
 import android.support.annotation.IntRange;
 import android.support.annotation.Nullable;
 import android.support.v4.util.ArrayMap;
@@ -29,9 +9,6 @@ import android.view.ViewGroup;
 
 import java.util.List;
 
-/**
- * @author Aidan Follestad (afollestad)
- */
 public abstract class SectionedRecyclerViewAdapter<VH extends RecyclerView.ViewHolder> extends RecyclerView.Adapter<VH> {
 
     protected final static int VIEW_TYPE_HEADER = -2;

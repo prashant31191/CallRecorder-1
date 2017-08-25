@@ -8,11 +8,6 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
-/**
- * Created by Jeff on 02-May-16.
- *
- * Info about a phone call recording
- */
 public class PhoneCallRecord {
 
     // Cache of Contact Pictures to minimize image memory use...

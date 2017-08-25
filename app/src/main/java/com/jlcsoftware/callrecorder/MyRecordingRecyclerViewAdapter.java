@@ -33,6 +33,8 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
+import google.ads.AdsDisplayUtil;
+
 /**
  * {@link RecyclerView.Adapter} that can display a {@link CallLog} and makes a call to the
  * specified {@link OnListFragmentInteractionListener}.
@@ -72,8 +74,8 @@ public class MyRecordingRecyclerViewAdapter extends RecyclerView.Adapter<MyRecor
         mListener = listener;
         handler = new Handler(this);
         selectedItems = new SparseBooleanArray();
-        inImage = context.getResources().getDrawable(R.drawable.phone_in);
-        outImage = context.getResources().getDrawable(R.drawable.phone_out);
+        inImage = context.getResources().getDrawable(R.drawable.phone_in_24dp);
+        outImage = context.getResources().getDrawable(R.drawable.phone_out_24dp);
         loadAdapter(context, true);
     }
 
@@ -229,6 +231,10 @@ public class MyRecordingRecyclerViewAdapter extends RecyclerView.Adapter<MyRecor
         holder.mPlayBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                //AdsDisplayUtil.openIntAdsScreen(context,"131313");
+                AdsDisplayUtil.openBnrIntAdsScreen(context,"","");
+
                 if (null != mListener) {
                     mListener.onItemPlay(holder.mItem);
                 }

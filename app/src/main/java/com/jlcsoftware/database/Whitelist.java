@@ -3,11 +3,6 @@ package com.jlcsoftware.database;
 import android.content.ContentValues;
 import android.database.Cursor;
 
-/**
- * Created by Jeff on 07-May-16.
- *
- * A Whitelist record from our database
- */
 public class Whitelist {
 
     boolean isNew = true;

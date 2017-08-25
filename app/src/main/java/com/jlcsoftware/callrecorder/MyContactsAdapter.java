@@ -21,9 +21,6 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by Jeff on 13-May-16.
- */
 public class MyContactsAdapter extends BaseAdapter implements Handler.Callback {
         private List<ContactRecord> mValues;
         private Context context;

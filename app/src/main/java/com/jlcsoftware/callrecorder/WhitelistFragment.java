@@ -21,13 +21,6 @@ import android.widget.ListView;
 import com.jlcsoftware.database.Database;
 import com.jlcsoftware.database.Whitelist;
 
-
-/**
- * A fragment representing a list of Items.
- * <p/>
- * Activities containing this fragment MUST implement the {@link OnListFragmentInteractionListener}
- * interface.
- */
 public class WhitelistFragment extends Fragment implements MyWhitelistItemRecyclerViewAdapter.OnListInteractionListener {
 
     private static final String ARG_COLUMN_COUNT = "ARG_COLUMN_COUNT";

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
     android:background="@drawable/selected_list_item"
@@ -38,7 +39,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingRight="10dp"
-                android:src="@drawable/phone_out"
+                android:src="@drawable/phone_out_24dp"
                 android:tint="@color/colorPrimary" />
 
             <ImageView
@@ -46,7 +47,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingRight="5dp"
-                android:src="@drawable/clock_circular"
+                android:src="@drawable/clock_circular_24dp"
                 android:tint="@color/colorPrimary" />
 
             <TextView
@@ -62,7 +63,7 @@
                 android:layout_height="wrap_content"
                 android:paddingLeft="5dp"
                 android:paddingRight="5dp"
-                android:src="@drawable/day"
+                android:src="@drawable/day_24dp"
                 android:tint="@color/colorPrimary" />
 
             <TextView

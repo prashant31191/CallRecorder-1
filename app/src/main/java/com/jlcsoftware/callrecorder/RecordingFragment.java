@@ -12,8 +12,6 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-
-import com.google.android.gms.ads.AdView;
 import com.jlcsoftware.receivers.MyLocalBroadcastReceiver;
 
 /**

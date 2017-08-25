@@ -6,11 +6,6 @@ import android.os.Environment;
 
 import java.io.File;
 
-/**
- * Created by Jeff on 01-May-16.
- * A Singleton
- * Wrapper around the default SharedPreferences so we can easily set and read our settings
- */
 public class AppPreferences {
 
     private static AppPreferences instance = null;

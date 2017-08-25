@@ -11,16 +11,6 @@ import com.jlcsoftware.services.RecordCallService;
 
 import java.util.concurrent.atomic.AtomicBoolean;
 
-/**
- * Created by Jeff on 01-May-16.
- * <p/>
- * The logic is a little odd here...
- * <p/>
- * When a incoming call comes in, we get a CALL_STATE_RINGING that provides the incoming number and all is easy and good...
- * on the other hand, a Outgoing call generates a ACTION_NEW_OUTGOING_CALL with the phone number, then an a CALL_STATE_IDLE and then a
- * CALL_STATE_OFFHOOK when the call connects - we never get the outgoing number in the PhoneState Change
- * <p/>
- */
 public class PhoneListener extends PhoneStateListener {
 
     private static PhoneListener instance = null;

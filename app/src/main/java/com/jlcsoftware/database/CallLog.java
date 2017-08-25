@@ -6,11 +6,6 @@ import android.content.Context;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
-/**
- * Created by Jeff on 01-May-16.
- * <p>
- * A Call Log record from our database
- */
 public class CallLog {
 
     static final int VERSION = 1;

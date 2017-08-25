@@ -9,10 +9,6 @@ import android.util.Log;
 import com.Utils.CallRecord;
 import com.helper.PrefsHelper;
 
-/**
- * Created by aykutasil on 19.10.2016.
- */
-
 public class CallRecordService extends Service {
 
     private static final String TAG = CallRecordService.class.getSimpleName();

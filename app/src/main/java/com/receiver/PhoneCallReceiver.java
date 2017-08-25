@@ -7,10 +7,6 @@ import android.telephony.TelephonyManager;
 
 import java.util.Date;
 
-/**
- * Created by aykutasil on 22.12.2016.
- */
-
 public abstract class PhoneCallReceiver extends BroadcastReceiver {
 
     //The receiver will be recreated whenever android feels like it.  We need a static variable to remember data between instantiations
