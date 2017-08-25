@@ -1,0 +1,443 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.test.drinkwaterdemo.activity.ActOnlinePayment">
+    <!--android:background="@color/background"-->
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:layout_margin="@dimen/size_10">
+
+
+                <LinearLayout
+                    android:id="@+id/ll_payment_reason"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Choose Reason for Payment:"
+                        android:textStyle="bold"
+                        android:textColor="@color/colorPrimary"
+                        android:paddingLeft="@dimen/size_2"
+                        android:textSize="@dimen/size_18" />
+
+                    <Spinner
+                        android:id="@+id/spinner_payment_reson"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingLeft="@dimen/size_2"
+                        android:layout_marginTop="@dimen/size_10"/>
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginLeft="@dimen/size_2"
+                        android:layout_marginRight="@dimen/size_5"
+                        android:background="@color/colorPrimary"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/ll_patient_detail"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_marginTop="@dimen/size_10">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Patient Details"
+                        android:paddingLeft="@dimen/size_2"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="@dimen/size_18"
+                        android:layout_marginTop="@dimen/size_10"/>
+
+                    <EditText
+                        android:id="@+id/edt_patientname"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Patient Name:*"
+                        android:singleLine="true"
+                        android:textColor="#000"
+                        android:textSize="@dimen/size_16"
+                        android:layout_marginTop="@dimen/size_10"
+                        android:textColorHint="@color/hint"
+                        android:backgroundTint="@color/colorPrimary"/>
+
+                    <EditText
+                        android:id="@+id/edt_uhid"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="UHID / Bed Number:*"
+                        android:singleLine="true"
+                        android:textSize="@dimen/size_16"
+                        android:layout_marginTop="@dimen/size_10"
+                        android:textColor="#000"
+                        android:textColorHint="@color/hint"
+                        android:backgroundTint="@color/colorPrimary"/>
+
+                    <EditText
+                        android:id="@+id/edt_patientrel"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Relationship to the Patient:*"
+                        android:singleLine="true"
+                        android:textColor="#000"
+                        android:textSize="@dimen/size_16"
+                        android:layout_marginTop="@dimen/size_10"
+                        android:textColorHint="@color/hint"
+                        android:visibility="visible"
+                        android:backgroundTint="@color/colorPrimary"/>
+
+                    <EditText
+                        android:id="@+id/edt_mobile"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Mobile Number:*"
+                        android:inputType="number"
+                        android:textSize="@dimen/size_16"
+                        android:layout_marginTop="@dimen/size_10"
+                        android:singleLine="true"
+                        android:textColor="#000"
+                        android:textColorHint="@color/hint"
+                        android:backgroundTint="@color/colorPrimary" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/ll_address_same"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_marginTop="@dimen/size_10">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Your Details"
+                        android:paddingLeft="@dimen/size_2"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="@dimen/size_18"/>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_marginTop="@dimen/size_10">
+
+                        <CheckBox
+                            android:id="@+id/checkbox_address"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:buttonTint="@color/colorPrimaryDark"/>
+                        <!--android:button="@drawable/xml_checkbox_color" -->
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Same as above"
+                            android:textSize="@dimen/size_14"
+                            android:layout_marginLeft="@dimen/size_5"/>
+
+                    </LinearLayout>
+
+                    <EditText
+                        android:id="@+id/edt_fullnm"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Full Name:*"
+                        android:singleLine="true"
+                        android:textSize="@dimen/size_16"
+                        android:layout_marginTop="@dimen/size_10"
+                        android:textColor="#000"
+                        android:textColorHint="@color/hint"
+                        android:backgroundTint="@color/colorPrimary"/>
+
+                    <EditText
+                        android:id="@+id/edt_emailid"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Email Address:*"
+                        android:inputType="textEmailAddress"
+                        android:singleLine="true"
+                        android:textSize="@dimen/size_16"
+                        android:layout_marginTop="@dimen/size_10"
+                        android:textColor="#000"
+                        android:textColorHint="@color/hint"
+                        android:backgroundTint="@color/colorPrimary" />
+
+
+                    <EditText
+                        android:id="@+id/edt_mobilepersonal"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Mobile Number:*"
+                        android:inputType="number"
+                        android:singleLine="true"
+                        android:textSize="@dimen/size_16"
+                        android:layout_marginTop="@dimen/size_10"
+                        android:textColor="#000"
+                        android:textColorHint="@color/hint"
+                        android:backgroundTint="@color/colorPrimary" />
+
+                    <EditText
+                        android:id="@+id/edt_addline1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Address Line 1:*"
+                        android:singleLine="true"
+                        android:textSize="@dimen/size_16"
+                        android:layout_marginTop="@dimen/size_10"
+                        android:textColor="#000"
+                        android:textColorHint="@color/hint"
+                        android:backgroundTint="@color/colorPrimary"/>
+
+                    <EditText
+                        android:id="@+id/edt_addline2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Address Line 2:*"
+                        android:singleLine="true"
+                        android:textSize="@dimen/size_16"
+                        android:layout_marginTop="@dimen/size_10"
+                        android:textColor="#000"
+                        android:textColorHint="@color/hint"
+                        android:backgroundTint="@color/colorPrimary"/>
+
+                    <EditText
+                        android:id="@+id/edt_city"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="City:*"
+                        android:singleLine="true"
+                        android:textSize="@dimen/size_16"
+                        android:layout_marginTop="@dimen/size_10"
+                        android:textColor="#000"
+                        android:textColorHint="@color/hint"
+                        android:backgroundTint="@color/colorPrimary"/>
+
+                    <EditText
+                        android:id="@+id/edt_state"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="State:*"
+                        android:singleLine="true"
+                        android:textSize="@dimen/size_16"
+                        android:layout_marginTop="@dimen/size_10"
+                        android:textColor="#000"
+                        android:textColorHint="@color/hint"
+                        android:backgroundTint="@color/colorPrimary"/>
+
+                    <Spinner
+                        android:id="@+id/spinner_country"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/size_5"
+                        android:layout_marginRight="@dimen/size_5"
+                        android:layout_marginTop="@dimen/size_10" />
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginLeft="@dimen/size_5"
+                        android:layout_marginRight="@dimen/size_5"
+                        android:background="@color/colorPrimary"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/ll_bill_details"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_marginTop="@dimen/size_10">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Bill Details"
+                        android:layout_marginLeft="@dimen/size_3"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="@dimen/size_18"
+                        android:layout_marginTop="@dimen/size_10"/>
+
+                    <EditText
+                        android:id="@+id/edt_amount"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Amount in Rupees:*"
+                        android:inputType="number"
+                        android:singleLine="true"
+                        android:textSize="@dimen/size_16"
+                        android:layout_marginTop="@dimen/size_10"
+                        android:textColor="#000"
+                        android:textColorHint="@color/hint"
+                        android:backgroundTint="@color/colorPrimary" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="@dimen/size_2"
+                        android:text="Please enter in xxx.xx format"
+                        android:textSize="@dimen/size_14"/>
+
+                    <EditText
+                        android:id="@+id/edt_amount1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Re-enter Amount in Rupees:*"
+                        android:inputType="number"
+                        android:singleLine="true"
+                        android:textSize="@dimen/size_16"
+                        android:layout_marginTop="@dimen/size_10"
+                        android:textColor="#000"
+                        android:textColorHint="@color/hint"
+                        android:backgroundTint="@color/colorPrimary" />
+
+                    <LinearLayout
+                        android:id="@+id/ll_advance_payment"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <CheckBox
+                            android:id="@+id/checkbox_advance_payment"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:buttonTint="@color/colorPrimaryDark"/>
+                        <!--android:button="@drawable/xml_checkbox_color" -->
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="This is an advance payment"
+                            android:layout_marginLeft="@dimen/size_2"
+                            android:textSize="@dimen/size_14" />
+
+                    </LinearLayout>
+
+
+                    <EditText
+                        android:id="@+id/edt_billno"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Bill Number:*"
+                        android:inputType="number"
+                        android:singleLine="true"
+                        android:textSize="@dimen/size_16"
+                        android:layout_marginTop="@dimen/size_10"
+                        android:textColor="#000"
+                        android:textColorHint="@color/hint"
+                        android:backgroundTint="@color/colorPrimary" />
+
+                    <EditText
+                        android:id="@+id/edt_manual_receipt_no"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Manual Receipt Number:*"
+                        android:singleLine="true"
+                        android:textSize="@dimen/size_16"
+                        android:layout_marginTop="@dimen/size_10"
+                        android:textColor="#000"
+                        android:textColorHint="@color/hint"
+                        android:backgroundTint="@color/colorPrimary"
+                        android:visibility="gone"/>
+
+                    <EditText
+                        android:id="@+id/edt_representative_nm"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Representative Name:*"
+                        android:singleLine="true"
+                        android:textSize="@dimen/size_16"
+                        android:layout_marginTop="@dimen/size_10"
+                        android:textColor="#000"
+                        android:textColorHint="@color/hint"
+                        android:backgroundTint="@color/colorPrimary"
+                        android:visibility="gone"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/ll_payment_details"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Payment Details"
+                        android:textColor="@color/colorPrimary"
+                        android:paddingLeft="@dimen/size_5"
+                        android:textSize="@dimen/size_18"
+                        android:layout_marginTop="@dimen/size_10"/>
+
+                    <Spinner
+                        android:id="@+id/spinner_payment_type"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/size_5"
+                        android:layout_marginTop="@dimen/size_10"/>
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginLeft="@dimen/size_5"
+                        android:layout_marginRight="@dimen/size_5"
+                        android:background="@color/colorPrimary" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_marginTop="@dimen/size_10">
+
+                        <CheckBox
+                            android:id="@+id/checkbox_terms_condition"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/size_10"
+                            android:buttonTint="@color/colorPrimaryDark" />
+                        <!--android:button="@drawable/xml_checkbox_color"-->
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/size_10"
+                            android:text="I Agree to The Terms and Conditions Stated Here"
+                            android:textSize="@dimen/size_14"
+                            android:layout_marginLeft="@dimen/size_5"/>
+
+                    </LinearLayout>
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/tv_submit"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/colorPrimaryDark"
+                    android:padding="10dp"
+                    android:text="CONFIRM"
+                    android:textAlignment="center"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/size_18"
+                    android:layout_marginTop="@dimen/size_20"
+                    android:layout_marginBottom="@dimen/size_20"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+
+    </ScrollView>
+
+</RelativeLayout>

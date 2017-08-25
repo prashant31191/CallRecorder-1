@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:custom="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!--<android.support.v4.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true"
+        android:layout_above="@+id/rl_bottom">-->
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_above="@+id/view_in_center"
+            android:background="@color/colorPrimary" />
+
+        <View
+            android:id="@+id/view_in_center"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_centerInParent="true" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/view_in_center"
+            android:background="@color/white" />
+
+        <RelativeLayout
+            android:id="@+id/rl_watercircle"
+            android:layout_width="300dp"
+            android:layout_height="300dp"
+            android:layout_centerInParent="true"
+            android:background="@drawable/xml_round_corner"
+            android:padding="5dp">
+
+
+            <com.github.lzyzsd.circleprogress.ArcProgress
+                android:id="@+id/arc_progress"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:layout_margin="5dp"
+
+                custom:arc_angle="360"
+                custom:arc_finished_color="@color/colorPrimary"
+                custom:arc_stroke_width="25dp"
+                custom:arc_suffix_text_size="0dp"
+                custom:arc_text_size="0dp"
+                custom:arc_unfinished_color="@color/grey" />
+
+            <TextView
+                android:id="@+id/tv_water_consume"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_above="@+id/view1"
+                android:layout_marginLeft="120dp"
+                android:text=""
+                android:textColor="@color/black"
+                android:textSize="22dp" />
+
+            <View
+                android:id="@+id/view1"
+                android:layout_width="200dp"
+                android:layout_height="4dp"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="5dp"
+                android:background="@color/colorPrimary" />
+
+            <TextView
+                android:id="@+id/tv_water_target"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/view1"
+                android:layout_marginLeft="150dp"
+                android:text=""
+                android:textColor="@color/black"
+                android:textSize="22dp" />
+
+
+        </RelativeLayout>
+
+
+    </RelativeLayout>
+
+    <!--</android.support.v4.widget.NestedScrollView>-->
+
+    <LinearLayout
+        android:id="@+id/rl_bottom"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@color/grey"
+        android:orientation="horizontal"
+        android:visibility="gone">
+
+        <EditText
+            android:id="@+id/et_liter"
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:inputType="number"
+            android:maxLength="4"
+            android:maxLines="1"
+            android:textColor="@color/white" />
+
+        <Button
+            android:id="@+id/btn_liter"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="30dp"
+            android:layout_toRightOf="@+id/etprogress"
+            android:background="@color/blue"
+            android:text="ml water"
+            android:textColor="@color/white" />
+
+
+        <EditText
+            android:id="@+id/etprogress"
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:inputType="number"
+            android:maxLength="3"
+            android:maxLines="1"
+            android:textColor="@color/white" />
+
+        <Button
+            android:id="@+id/btngo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_toRightOf="@+id/etprogress"
+            android:background="@color/blue"
+            android:text="Calculate"
+            android:textColor="@color/white" />
+
+    </LinearLayout>
+
+</RelativeLayout>
