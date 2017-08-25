@@ -13,6 +13,7 @@ import android.widget.SectionIndexer;
 import android.widget.TextView;
 
 import com.test.drinkwaterdemo.R;
+import com.test.drinkwaterdemo.model.ModelDrinkList;
 
 import java.util.ArrayList;
 
@@ -26,8 +27,10 @@ public class TestDateBaseAdapter extends BaseAdapter implements
     private int[] mSectionIndices;
     private Character[] mSectionLetters;
     private LayoutInflater mInflater;
+    ArrayList<ModelDrinkList> arrayListData;
 
-    public TestDateBaseAdapter(Context context) {
+    public TestDateBaseAdapter(Context context,ArrayList<ModelDrinkList> arrayListModelDrinkList) {
+        arrayListData = arrayListModelDrinkList;
         mContext = context;
         mInflater = LayoutInflater.from(context);
         mCountries = context.getResources().getStringArray(R.array.countries);
@@ -62,12 +65,12 @@ public class TestDateBaseAdapter extends BaseAdapter implements
 
     @Override
     public int getCount() {
-        return mCountries.length;
+        return arrayListData.size();
     }
 
     @Override
     public Object getItem(int position) {
-        return mCountries[position];
+        return arrayListData.get(position);
     }
 
     @Override
@@ -88,7 +91,7 @@ public class TestDateBaseAdapter extends BaseAdapter implements
             holder = (ViewHolder) convertView.getTag();
         }
 
-        holder.text.setText(mCountries[position]);
+        holder.text.setText(position+"==="+arrayListData.get(position).getDrink_list_date() + arrayListData.get(position).getDrink_list_time());
 
         return convertView;
     }
@@ -107,7 +110,8 @@ public class TestDateBaseAdapter extends BaseAdapter implements
         }
 
         // set header text as first char in name
-        CharSequence headerChar = mCountries[position].subSequence(0, 1);
+        //CharSequence headerChar = arrayListData[position].subSequence(0, 1);
+        String headerChar = arrayListData.get(position).getDrink_list_date();
         holder.text.setText(headerChar);
 
         return convertView;
@@ -121,7 +125,8 @@ public class TestDateBaseAdapter extends BaseAdapter implements
     public long getHeaderId(int position) {
         // return the first character of the country as ID because this is what
         // headers are based upon
-        return mCountries[position].subSequence(0, 1).charAt(0);
+        //return position;
+        return Long.parseLong(arrayListData.get(position).getDrink_list_date().replaceAll("-",""));// mCountries[position].subSequence(0, 1).charAt(0);
     }
 
     @Override
@@ -153,19 +158,6 @@ public class TestDateBaseAdapter extends BaseAdapter implements
         return mSectionLetters;
     }
 
-    public void clear() {
-        mCountries = new String[0];
-        mSectionIndices = new int[0];
-        mSectionLetters = new Character[0];
-        notifyDataSetChanged();
-    }
-
-    public void restore() {
-        mCountries = mContext.getResources().getStringArray(R.array.countries);
-        mSectionIndices = getSectionIndices();
-        mSectionLetters = getSectionLetters();
-        notifyDataSetChanged();
-    }
 
     class HeaderViewHolder {
         TextView text;

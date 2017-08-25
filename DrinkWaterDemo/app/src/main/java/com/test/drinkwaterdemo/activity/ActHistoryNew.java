@@ -64,7 +64,7 @@ public class ActHistoryNew extends AppCompatActivity {
     public void initialize() {
         try {
 
-            mAdapter = new TestDateBaseAdapter(this);
+            mAdapter = new TestDateBaseAdapter(this,arrayListModelDrinkList);
 
             stickyList = (StickyListHeadersListView) findViewById(R.id.list);
 

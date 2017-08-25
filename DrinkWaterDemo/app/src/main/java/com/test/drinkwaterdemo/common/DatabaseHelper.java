@@ -321,11 +321,13 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                     do {
                         ModelDrinkList model = new ModelDrinkList();
                         String date = cursor.getString(cursor.getColumnIndex(Drink_List_Date));
-                        String quantity = cursor.getString(cursor.getColumnIndex("SUM("+Drink_List_QuantityML+")"));
+                        String time = cursor.getString(cursor.getColumnIndex(Drink_List_Time));
+                        //String quantity = cursor.getString(cursor.getColumnIndex("SUM("+Drink_List_QuantityML+")"));
 
                         try {
                             model.setDrink_list_date(date);
-                            model.setDrink_list_quantityml(quantity);
+                            model.setDrink_list_time(time);
+                           // model.setDrink_list_quantityml(quantity);
                             data.add(model);
 
                         } catch (Exception e) {
