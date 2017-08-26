@@ -8,7 +8,7 @@ It's up to you to determine if this is legal in your jurisdiction. Not every pho
 
 ### Demo
 Full Version can be downloaded from [Google Play] 
-(https://play.google.com/store/apps/details?id=com.jlcsoftware.callrecorder)
+(https://play.google.com/store/apps/details?id=azapps.callrecorder)
 
 Screen Shot:<br>
 <img src="https://github.com/rjeffm/CallRecorder/blob/master/Screenshot_2016-05-14-16-07-40.png" width="250">

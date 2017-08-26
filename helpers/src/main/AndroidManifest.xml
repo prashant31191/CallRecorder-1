@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.jlcsoftware.helpers">
+    package="com.azapps.helpers">
 
     <application
         android:allowBackup="true"

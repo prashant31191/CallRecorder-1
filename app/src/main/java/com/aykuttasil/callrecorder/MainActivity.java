@@ -6,7 +6,7 @@ import android.util.Log;
 import android.view.View;
 
 import com.Utils.CallRecord;
-import com.jlcsoftware.callrecorder.R;
+import com.azapps.callrecorder.R;
 
 
 public class MainActivity extends Activity {

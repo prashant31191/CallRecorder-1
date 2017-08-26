@@ -4,7 +4,7 @@ android {
     compileSdkVersion 25
     buildToolsVersion "25.0.2"
     defaultConfig {
-        applicationId "com.jlcsoftware.callrecorder"
+        applicationId "com.azapps.callrecorder"
         minSdkVersion 15
         targetSdkVersion 20
         versionCode 1

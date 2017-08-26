@@ -1,0 +1,28 @@
+apk key store details
+
+
+
+----------------------------------------
+App name = AzCallRecorder
+
+keystore file name = callrecorder
+alis name = callrecorder
+password = 123456789
+
+----------------------------------------------
+Publish #1
+
+26-08-2017
+------------------------
+ compileSdkVersion 25
+    buildToolsVersion "25.0.2"
+    defaultConfig {
+        applicationId "com.azapps.callrecorder"
+        minSdkVersion 15
+        targetSdkVersion 20
+        versionCode 1
+        versionName '1.0'
+    }
+
+
+

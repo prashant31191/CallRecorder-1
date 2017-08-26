@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.jlcsoftware.callrecorder">
+    package="com.azapps.callrecorder">
 
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.CALL_PHONE" />
@@ -19,12 +19,12 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".MainActivity"
+            android:name="com.azapps.callrecorder.MainActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
@@ -34,7 +34,7 @@
         </activity>
 
         <receiver
-            android:name="com.jlcsoftware.receivers.MyCallReceiver"
+            android:name="com.azapps.receivers.MyCallReceiver"
             android:enabled="true"
             android:exported="true"
             android:priority="0">
@@ -47,44 +47,44 @@
         <!--
         android:enabled="false" to prevent system creation... Actually, not needed here at all since it is only used internally...
         <receiver
-            android:name="com.jlcsoftware.receivers.MyBroadcastReceiver"
+            android:naazappsreceivers.MyBroadcastReceiver"
             android:enabled="false"
             android:exported="false">
             <intent-filter>
-                <action android:name="com.jlcsoftware.NEW_RECORDING_ACTION" />
+                <action android:naazappsNEW_RECORDING_ACTION" />
             </intent-filter>
             <intent-filter>
-                <action android:name="com.jlcsoftware.RECORDING_DELETED_BROADCAST" />
+                <action android:naazappsRECORDING_DELETED_BROADCAST" />
             </intent-filter>
         </receiver>
         -->
         <activity
-            android:name=".WhitelistActivity"
-            android:parentActivityName=".MainActivity" />
+            android:name="com.azapps.callrecorder.WhitelistActivity"
+            android:parentActivityName="com.azapps.callrecorder.MainActivity" />
         <!-- The meta-data element is needed for versions lower than 4.1 -->
         <meta-data
             android:name="android.support.PARENT_ACTIVITY"
-            android:value="com.jlcsoftware.callrecorder.MainActivity" />
+            android:value="com.azapps.callrecorder.MainActivity" />
 
         <activity
-            android:name=".SettingsActivity"
+            android:name="com.azapps.callrecorder.SettingsActivity"
             android:label="@string/title_activity_settings"
-            android:parentActivityName=".MainActivity">
+            android:parentActivityName="com.azapps.callrecorder.MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.jlcsoftware.callrecorder.MainActivity" />
+                android:value="com.azapps.callrecorder.MainActivity" />
         </activity>
 
         <service
-            android:name="com.jlcsoftware.services.RecordCallService"
+            android:name="com.azapps.services.RecordCallService"
             android:exported="false" />
         <service
-            android:name="com.jlcsoftware.services.CleanupService"
+            android:name="com.azapps.services.CleanupService"
             android:enabled="true"
             android:exported="false" />
 
         <receiver
-            android:name="com.jlcsoftware.receivers.MyAlarmReceiver"
+            android:name="com.azapps.receivers.MyAlarmReceiver"
             android:enabled="true"
             android:exported="true"></receiver>
 
