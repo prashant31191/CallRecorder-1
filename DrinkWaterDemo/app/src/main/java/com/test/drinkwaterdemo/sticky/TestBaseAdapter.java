@@ -101,6 +101,7 @@ public class TestBaseAdapter extends BaseAdapter implements
             holder = new HeaderViewHolder();
             convertView = mInflater.inflate(R.layout.header, parent, false);
             holder.text = (TextView) convertView.findViewById(R.id.text1);
+            holder.text2 = (TextView) convertView.findViewById(R.id.text2);
             convertView.setTag(holder);
         } else {
             holder = (HeaderViewHolder) convertView.getTag();
@@ -109,6 +110,7 @@ public class TestBaseAdapter extends BaseAdapter implements
         // set header text as first char in name
         CharSequence headerChar = mCountries[position].subSequence(0, 1);
         holder.text.setText(headerChar);
+        holder.text2.setText(headerChar);
 
         return convertView;
     }
@@ -168,7 +170,7 @@ public class TestBaseAdapter extends BaseAdapter implements
     }
 
     class HeaderViewHolder {
-        TextView text;
+        TextView text,text2;
     }
 
     class ViewHolder {

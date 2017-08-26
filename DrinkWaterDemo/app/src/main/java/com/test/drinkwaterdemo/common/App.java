@@ -273,6 +273,17 @@ public class App extends Application {
             e.printStackTrace();
         }
     }
-
+    public static boolean isNumeric(String str)
+    {
+        try
+        {
+            double d = Double.parseDouble(str);
+        }
+        catch(NumberFormatException nfe)
+        {
+            return false;
+        }
+        return true;
+    }
 
 }

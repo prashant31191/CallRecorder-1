@@ -13,6 +13,7 @@ import android.widget.SectionIndexer;
 import android.widget.TextView;
 
 import com.test.drinkwaterdemo.R;
+import com.test.drinkwaterdemo.common.App;
 import com.test.drinkwaterdemo.model.ModelDrinkList;
 
 import java.util.ArrayList;
@@ -28,6 +29,7 @@ public class TestDateBaseAdapter extends BaseAdapter implements
     private Character[] mSectionLetters;
     private LayoutInflater mInflater;
     ArrayList<ModelDrinkList> arrayListData;
+    float intQml = 0;
 
     public TestDateBaseAdapter(Context context,ArrayList<ModelDrinkList> arrayListModelDrinkList) {
         arrayListData = arrayListModelDrinkList;
@@ -78,6 +80,7 @@ public class TestDateBaseAdapter extends BaseAdapter implements
         return position;
     }
 
+    String strTempDate = "";
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         ViewHolder holder;
@@ -91,7 +94,23 @@ public class TestDateBaseAdapter extends BaseAdapter implements
             holder = (ViewHolder) convertView.getTag();
         }
 
-        holder.text.setText(position+"==="+arrayListData.get(position).getDrink_list_date() + arrayListData.get(position).getDrink_list_time());
+        if(strTempDate.equalsIgnoreCase(arrayListData.get(position).getDrink_list_date()))
+        {
+
+        }
+        else
+        {
+            strTempDate = arrayListData.get(position).getDrink_list_date();
+            intQml = 0;
+        }
+
+
+
+        holder.text.setText(position+"==="+arrayListData.get(position).getDrink_list_date() + arrayListData.get(position).getDrink_list_time()+"==ml=="+ arrayListData.get(position).getDrink_list_quantityml());
+        if(App.isNumeric(arrayListData.get(position).getDrink_list_quantityml()))
+        {
+            intQml = intQml + Float.parseFloat(arrayListData.get(position).getDrink_list_quantityml());
+        }
 
         return convertView;
     }
@@ -104,6 +123,7 @@ public class TestDateBaseAdapter extends BaseAdapter implements
             holder = new HeaderViewHolder();
             convertView = mInflater.inflate(R.layout.header, parent, false);
             holder.text = (TextView) convertView.findViewById(R.id.text1);
+            holder.text2 = (TextView) convertView.findViewById(R.id.text2);
             convertView.setTag(holder);
         } else {
             holder = (HeaderViewHolder) convertView.getTag();
@@ -114,6 +134,10 @@ public class TestDateBaseAdapter extends BaseAdapter implements
         String headerChar = arrayListData.get(position).getDrink_list_date();
         holder.text.setText(headerChar);
 
+
+
+
+        holder.text2.setText("Tqml = "+arrayListData.get(position).getDrink_list_total_quantityml());
         return convertView;
     }
 
@@ -160,7 +184,7 @@ public class TestDateBaseAdapter extends BaseAdapter implements
 
 
     class HeaderViewHolder {
-        TextView text;
+        TextView text,text2;
     }
 
     class ViewHolder {

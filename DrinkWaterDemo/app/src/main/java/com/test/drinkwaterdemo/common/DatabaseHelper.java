@@ -310,9 +310,34 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public ArrayList<ModelDrinkList> getAllDataSortByDate() {
         ArrayList<ModelDrinkList> data = new ArrayList<ModelDrinkList>();
         try {
-            String selectQuery = "SELECT  * FROM " + TABLE_NAME_DRINK_LIST + " ORDER BY " + Drink_List_Date + " DESC";
+            //String selectQuery = "SELECT  * " +",SUM("+Drink_List_QuantityML+ ") FROM " + TABLE_NAME_DRINK_LIST +" GROUP BY " + Drink_List_Date + " ORDER BY " + Drink_List_Date + " DESC";
+            //String selectQuery = "SELECT  * " +",SUM("+Drink_List_QuantityML+ ") FROM " + TABLE_NAME_DRINK_LIST +" GROUP BY " + Drink_List_ID + " ORDER BY " + Drink_List_Date + " DESC";
+
+            /*select id,
+                    dt,
+                    pool_name,
+                    pool_id,
+                    buy_price,
+            (select sum(buy_price) from yourtable) total
+            from yourtable*/
+
+           // SELECT  Img,  (SELECT SUM(QuantityML) FROM Drink_List)  total FROM Drink_List ORDER BY Date DESC
+            //SELECT  *,  (SELECT SUM(QuantityML) FROM Drink_List)  total FROM Drink_List ORDER BY Date DESC
+            //SELECT  *,  (SELECT SUM(QuantityML) FROM Drink_List)  total FROM Drink_List ORDER BY Date DESC
+
+
+
+
+          //  String selectQuery = "SELECT  *, "+"(SELECT SUM("+Drink_List_QuantityML+") FROM "+TABLE_NAME_DRINK_LIST+") total FROM "+TABLE_NAME_DRINK_LIST +" ORDER BY " + Drink_List_Date + " DESC";
+            String selectQuery = "SELECT  * FROM "+TABLE_NAME_DRINK_LIST +" ORDER BY " + Drink_List_Date + " DESC";
+            App.showLog("--selectQuery--","==selectQuery=="+selectQuery);
+
+            //String selectQuery = "SELECT  Img,  (SELECT SUM(QuantityML) FROM Drink_List)  total FROM Drink_List ORDER BY Date DESC"
+
             SQLiteDatabase dbs = this.getReadableDatabase();
             Cursor cursor = null;
+            String strTempDate = "";
+            String quantityTotal = "0";
 
             cursor = dbs.rawQuery(selectQuery, null);
             if (cursor != null) {
@@ -322,12 +347,46 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                         ModelDrinkList model = new ModelDrinkList();
                         String date = cursor.getString(cursor.getColumnIndex(Drink_List_Date));
                         String time = cursor.getString(cursor.getColumnIndex(Drink_List_Time));
-                        //String quantity = cursor.getString(cursor.getColumnIndex("SUM("+Drink_List_QuantityML+")"));
+                     //   String quantity = cursor.getString(cursor.getColumnIndex("SUM("+Drink_List_QuantityML+")"));
+                        //String quantity = cursor.getString(cursor.getColumnIndex("total"));
+                        String quantity = cursor.getString(cursor.getColumnIndex(Drink_List_QuantityML));
+
+
+
+//SELECT *,SUM(QuantityML) From Drink_List WHERE Date="2017-08-25"
+
+
+                        if(strTempDate.equalsIgnoreCase(date))
+                        {
+
+                        }
+                        else
+                        {
+                            strTempDate = date;
+                            quantityTotal = "0";
+
+                            String selectQuery2 = "SELECT *,SUM("+Drink_List_QuantityML+") From Drink_List WHERE Date='"+date+"'";
+                            App.showLog("--selectQuery2--","==selectQuery2=="+selectQuery);
+                            Cursor cursor2 = null;
+                            cursor2 = dbs.rawQuery(selectQuery2, null);
+                            if (cursor2 != null) {
+                                cursor2.moveToFirst();
+                                if (cursor2.moveToFirst()) {
+                                    do{
+                                        quantityTotal = cursor2.getString(cursor2.getColumnIndex("SUM(" + Drink_List_QuantityML + ")"));
+                                        App.showLog("Q2","========quantityTotal====="+quantityTotal);
+                                        break;
+
+                                    } while (cursor2.moveToNext());
+                                }
+                            }
+                        }
 
                         try {
                             model.setDrink_list_date(date);
                             model.setDrink_list_time(time);
-                           // model.setDrink_list_quantityml(quantity);
+                            model.setDrink_list_quantityml(quantity);
+                            model.setDrink_list_total_quantityml(quantityTotal);
                             data.add(model);
 
                         } catch (Exception e) {
@@ -344,5 +403,23 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return data;
     }
 
+    public String getDateTotalMl(String strDate) {
+
+        String quantityTotal = "0";
+        SQLiteDatabase dbs = this.getReadableDatabase();
+        String selectQuery2 = "SELECT *,SUM("+Drink_List_QuantityML+") From Drink_List WHERE Date="+strDate+"";
+                        Cursor cursor2 = null;
+                        cursor2 = dbs.rawQuery(selectQuery2, null);
+                        if (cursor2 != null) {
+                            cursor2.moveToFirst();
+                            if (cursor2.moveToFirst()) {
+                                quantityTotal = cursor2.getString(cursor2.getColumnIndex("SUM(" + Drink_List_QuantityML + ")"));
+                                App.showLog("Q2","========quantityTotal====="+quantityTotal);
+                            }
+                        }
+        cursor2.close();
+        dbs.close();
+                        return quantityTotal;
+    }
 
 }

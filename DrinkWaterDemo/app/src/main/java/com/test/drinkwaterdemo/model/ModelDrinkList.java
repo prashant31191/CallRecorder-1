@@ -21,6 +21,7 @@ public class ModelDrinkList {
     String drink_list_date;
     String drink_list_img;
     String drink_list_quantityml;
+    String drink_list_total_quantityml;
 
     public String getDrink_list_weight() {
         return drink_list_weight;
@@ -60,5 +61,13 @@ public class ModelDrinkList {
 
     public void setDrink_list_quantityml(String drink_list_quantityml) {
         this.drink_list_quantityml = drink_list_quantityml;
+    }
+
+    public String getDrink_list_total_quantityml() {
+        return drink_list_total_quantityml;
+    }
+
+    public void setDrink_list_total_quantityml(String drink_list_total_quantityml) {
+        this.drink_list_total_quantityml = drink_list_total_quantityml;
     }
 }
