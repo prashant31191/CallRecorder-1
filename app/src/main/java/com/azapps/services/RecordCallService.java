@@ -20,7 +20,7 @@ import com.azapps.database.CallLog;
 import java.io.File;
 import java.util.Calendar;
 
-import google.ads.AdsDisplayUtil;
+//import google.ads.AdsDisplayUtil;
 
 /**
  * The nitty gritty Service that handles actually recording the conversations
@@ -177,7 +177,7 @@ public class RecordCallService extends Service {
         intent.setAction(ACTION_STOP_RECORDING);
         context.stopService(intent);
 
-        AdsDisplayUtil.openBnrIntAdsScreen(context,"","");
+        //AdsDisplayUtil.openBnrIntAdsScreen(context,"","");
     }
 
 

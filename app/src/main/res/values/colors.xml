@@ -18,6 +18,7 @@
     <color name="colorPrimaryLight">#c8e6c9</color><!-- materialpalette: primary_light -->
     <color name="colorAccent">#FFC107</color><!-- materialpalette: accent -->
     <color name="textColorPrimary">#212121</color><!-- materialpalette: primary_text -->
+    <color name="textColorPrimary2">#111111</color><!-- materialpalette: primary_text -->
     <color name="textColorSecondary">#727272</color><!-- materialpalette: secondary_text -->
     <color name="listDivider">#B6B6B6</color><!-- materialpalette: divider -->
 

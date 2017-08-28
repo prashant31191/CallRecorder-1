@@ -306,10 +306,10 @@ public class MainActivity extends AppCompatActivity implements RecordingFragment
             }
             return true;
         }
-        if (R.id.action_about == id) {
-            AboutDialog.show(this);
+       /* if (R.id.action_about == id) {
+           // AboutDialog.show(this);
             return true;
-        }
+        }*/
 
         return super.onOptionsItemSelected(item);
     }

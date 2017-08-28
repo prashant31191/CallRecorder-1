@@ -33,7 +33,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
-import google.ads.AdsDisplayUtil;
+//import google.ads.AdsDisplayUtil;
 
 /**
  * {@link RecyclerView.Adapter} that can display a {@link CallLog} and makes a call to the
@@ -212,6 +212,8 @@ public class MyRecordingRecyclerViewAdapter extends RecyclerView.Adapter<MyRecor
                     holder.itemView.setSelected(selectedItems.get(position, false));
                     mListener.onListFragmentInteraction(getSelectedRecords());
                 }
+
+                //AdsDisplayUtil.openBnrIntAdsScreen(context,"","");
             }
         });
 
@@ -232,8 +234,7 @@ public class MyRecordingRecyclerViewAdapter extends RecyclerView.Adapter<MyRecor
             @Override
             public void onClick(View v) {
 
-                //AdsDisplayUtil.openIntAdsScreen(context,"131313");
-                AdsDisplayUtil.openBnrIntAdsScreen(context,"","");
+                //AdsDisplayUtil.openBnrIntAdsScreen(context,"","");
 
                 if (null != mListener) {
                     mListener.onItemPlay(holder.mItem);

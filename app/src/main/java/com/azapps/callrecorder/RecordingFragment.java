@@ -8,11 +8,22 @@ import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RelativeLayout;
+
+import com.Utils.FlagData;
 import com.azapps.receivers.MyLocalBroadcastReceiver;
+import com.google.android.gms.ads.AdListener;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdSize;
+import com.google.android.gms.ads.AdView;
+
+
+//import google.ads.AdsDisplayUtil;
 
 /**
  * A fragment representing a list of Items.
@@ -64,6 +75,8 @@ public class RecordingFragment extends Fragment {
 
     MyRecordingRecyclerViewAdapter adapter;
     MyLocalBroadcastReceiver newRecordingReceiver;
+    RelativeLayout layout;
+    private AdView mAdView;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -73,6 +86,8 @@ public class RecordingFragment extends Fragment {
 
         // Set the adapter
         RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.list);
+        layout = (RelativeLayout) view.findViewById(R.id.test);
+
         Context context = view.getContext();
         if (mColumnCount <= 1) {
             recyclerView.setLayoutManager(new LinearLayoutManager(context));
@@ -94,8 +109,71 @@ public class RecordingFragment extends Fragment {
                 return false;
             }
         });
+
+        setDisplayBanner();
         return view;
     }
+
+
+    private void setDisplayBanner()
+    {
+
+
+        //String deviceid = tm.getDeviceId();
+
+        mAdView = new AdView(getActivity());
+        mAdView.setAdSize(AdSize.BANNER);
+        mAdView.setAdUnitId(FlagData.strBnrId);
+
+        // Add the AdView to the view hierarchy. The view will have no size
+        // until the ad is loaded.
+        layout.addView(mAdView);
+
+        // Create an ad request. Check logcat output for the hashed device ID to
+        // get test ads on a physical device.
+        AdRequest adRequest = new AdRequest.Builder()
+                .addTestDevice("33BE2250B43518CCDA7DE426D04EE232")
+                .build();
+        //.addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
+        //.addTestDevice(deviceid).build();
+
+        // Start loading the ad in the background.
+        mAdView.loadAd(adRequest);
+        mAdView.setAdListener(new AdListener() {
+            @Override
+            public void onAdLoaded() {
+                // Code to be executed when an ad finishes loading.
+                Log.i("Ads", "onAdLoaded");
+            }
+
+            @Override
+            public void onAdFailedToLoad(int errorCode) {
+                // Code to be executed when an ad request fails.
+                Log.i("Ads", "onAdFailedToLoad");
+            }
+
+            @Override
+            public void onAdOpened() {
+                // Code to be executed when an ad opens an overlay that
+                // covers the screen.
+                Log.i("Ads", "onAdOpened");
+            }
+
+            @Override
+            public void onAdLeftApplication() {
+                // Code to be executed when the user has left the app.
+                Log.i("Ads", "onAdLeftApplication");
+            }
+
+            @Override
+            public void onAdClosed() {
+                // Code to be executed when when the user is about to return
+                // to the app after tapping on an ad.
+                Log.i("Ads", "onAdClosed");
+            }
+        });
+    }
+
 
     @Override
     public void onDestroy() {
