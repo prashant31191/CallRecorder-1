@@ -18,7 +18,7 @@ Come visit us on the web at: <a href="http://jlcsoftware.com">http://jlcsoftware
 </small>
 ]]></string>
 
-    <string name="action_about">About</string>
+    <string name="action_about">Voice/Play/View-Recording</string>
     <string name="action_delete_all">Delete All</string>
     <string name="action_delete">Delete Selected</string>
     <string name="action_share">Share Selected</string>

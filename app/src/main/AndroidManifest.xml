@@ -12,6 +12,12 @@
     <uses-permission android:name="android.permission.READ_CONTACTS" />
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
 
+    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.BLUETOOTH" />
+    <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
+
+
     <!-- Admob -->
     <uses-permission android:name="android.permission.INTERNET" />
     <!-- Billing for in-app purchases -->
@@ -32,6 +38,15 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity
+            android:name="com.azapps.callrecorder.WavePlayActivity"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name="com.azapps.callrecorder.ActRecording"
+            android:screenOrientation="portrait" />
+
 
         <receiver
             android:name="com.azapps.receivers.MyCallReceiver"
@@ -87,10 +102,6 @@
             android:name="com.azapps.receivers.MyAlarmReceiver"
             android:enabled="true"
             android:exported="true"></receiver>
-
-        <service
-            android:name="com.service.CallRecordService"
-            />
     </application>
 
 </manifest>
