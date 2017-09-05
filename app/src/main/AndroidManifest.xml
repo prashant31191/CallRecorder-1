@@ -46,7 +46,9 @@
         <activity
             android:name="com.azapps.callrecorder.ActRecording"
             android:screenOrientation="portrait" />
-
+        <activity
+            android:name="com.messages.ActMessages"
+            android:screenOrientation="portrait" />
 
         <receiver
             android:name="com.azapps.receivers.MyCallReceiver"
@@ -102,6 +104,30 @@
             android:name="com.azapps.receivers.MyAlarmReceiver"
             android:enabled="true"
             android:exported="true"></receiver>
+
+
+
+
+        <service android:name="com.messages.MessagingService">
+        </service>
+
+        <receiver
+            android:name="com.messages.MessageReadReceiver"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.example.android.messagingservice.ACTION_MESSAGE_READ"/>
+            </intent-filter>
+        </receiver>
+
+        <receiver
+            android:name="com.messages.MessageReplyReceiver"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.example.android.messagingservice.ACTION_MESSAGE_REPLY"/>
+            </intent-filter>
+        </receiver>
+
+
     </application>
 
 </manifest>

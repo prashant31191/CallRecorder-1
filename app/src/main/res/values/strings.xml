@@ -19,6 +19,7 @@ Come visit us on the web at: <a href="http://jlcsoftware.com">http://jlcsoftware
 ]]></string>
 
     <string name="action_about">Voice/Play/View-Recording</string>
+    <string name="action_messages">Messages</string>
     <string name="action_delete_all">Delete All</string>
     <string name="action_delete">Delete Selected</string>
     <string name="action_share">Share Selected</string>
@@ -81,6 +82,13 @@ href="https://play.google.com/store/apps/developer?id=JL+Creative+Software">Goog
     <string name="pref_automatic_cleaning_now">Clean Now</string>
     <string name="pref_recording_category">Recording</string>
     <string name="pref_recording_show_video">Show Video</string>
+    <string name="replied">replied</string>
+    <string name="reply">reply</string>
+
+    <string name="send_1_conversation">send_1_conversation</string>
+    <string name="send_2_conversations">send_2_conversations</string>
+    <string name="send_1_conv_3_messages">send_1_conv_3_messages</string>
+    <string name="clear_log">clear_log</string>
 
     <string-array name="pref_frequencies">
         <item name="never">Never</item>

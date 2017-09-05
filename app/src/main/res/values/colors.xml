@@ -21,6 +21,7 @@
     <color name="textColorPrimary2">#111111</color><!-- materialpalette: primary_text -->
     <color name="textColorSecondary">#727272</color><!-- materialpalette: secondary_text -->
     <color name="listDivider">#B6B6B6</color><!-- materialpalette: divider -->
+    <color name="default_color_light">#B6B6B6</color><!-- materialpalette: divider -->
 
     <color name="colorTextIcons">#FFFFFF</color><!-- materialpalette: icons -->
 

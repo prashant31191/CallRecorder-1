@@ -33,6 +33,7 @@ import com.azapps.database.CallLog;
 import com.azapps.database.Database;
 import com.azapps.helpers.AboutDialog;
 import com.azapps.helpers.RateMeNowDialog;
+import com.messages.ActMessages;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -312,6 +313,14 @@ public class MainActivity extends AppCompatActivity implements RecordingFragment
             startActivity(intent);
             return true;
         }
+
+        if (R.id.action_messages == id) {
+            // AboutDialog.show(this);
+            Intent intent = new Intent(this, ActMessages.class);
+            startActivity(intent);
+            return true;
+        }
+
 
         return super.onOptionsItemSelected(item);
     }
