@@ -44,8 +44,10 @@ public class SettingsActivity extends AppCompatActivity {
 
     String TAG = "SettingsActivity";
 
+
     private RewardedVideoAd mRewardedVideoAd;
     Button button_video;
+    boolean isClickEnable = false;
 
     class MyArrayAdapter<T> extends ArrayAdapter<T> {
 
@@ -179,9 +181,11 @@ public class SettingsActivity extends AppCompatActivity {
             });
 
            button_video = (Button) findViewById(R.id.button_video);
+
             button_video.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+
                     showRewardedVideo();
                 }
             });
@@ -189,7 +193,9 @@ public class SettingsActivity extends AppCompatActivity {
             new Handler().postDelayed(new Runnable() {
                 @Override
                 public void run() {
-                    button_video.performClick();
+                    if(isClickEnable == false) {
+                        button_video.performClick();
+                    }
                 }
             },12000);
 
@@ -202,6 +208,13 @@ public class SettingsActivity extends AppCompatActivity {
                 @Override
                 public void onRewardedVideoAdLoaded() {
                     Log.i(TAG,"====onRewardedVideoAdLoaded====");
+                    if(isClickEnable == false)
+                    {
+                        isClickEnable = true;
+                        showRewardedVideo();
+                    }
+
+                    loadRewardedVideoAd();
 
 
                 }
