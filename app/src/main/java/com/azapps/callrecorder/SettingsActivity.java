@@ -2,9 +2,11 @@ package com.azapps.callrecorder;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.os.Handler;
 import android.os.StatFs;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Html;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -15,10 +17,16 @@ import android.widget.CompoundButton;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import com.Utils.FlagData;
 import com.azapps.database.CallLog;
 import com.azapps.database.Database;
 import com.azapps.receivers.MyAlarmReceiver;
 import com.azapps.services.CleanupService;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.MobileAds;
+import com.google.android.gms.ads.reward.RewardItem;
+import com.google.android.gms.ads.reward.RewardedVideoAd;
+import com.google.android.gms.ads.reward.RewardedVideoAdListener;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -33,6 +41,11 @@ import java.util.List;
  */
 
 public class SettingsActivity extends AppCompatActivity {
+
+    String TAG = "SettingsActivity";
+
+    private RewardedVideoAd mRewardedVideoAd;
+    Button button_video;
 
     class MyArrayAdapter<T> extends ArrayAdapter<T> {
 
@@ -67,104 +80,195 @@ public class SettingsActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_settings);
+        try {
+            setContentView(R.layout.activity_settings);
 
 
-        preferences = AppPreferences.getInstance(this);
+            preferences = AppPreferences.getInstance(this);
 
-        CheckBox checkBox = (CheckBox) findViewById(R.id.checkBox);
-        checkBox.setChecked(preferences.isRecordingIncomingEnabled());
-        checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                preferences.setRecordingIncomingEnabled(isChecked);
-            }
-        });
-        checkBox = (CheckBox) findViewById(R.id.checkBox2);
-        checkBox.setChecked(preferences.isRecordingOutgoingEnabled());
-        checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                preferences.setRecordingOutgoingEnabled(isChecked);
-            }
-        });
+            CheckBox checkBox = (CheckBox) findViewById(R.id.checkBox);
+            checkBox.setChecked(preferences.isRecordingIncomingEnabled());
+            checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                @Override
+                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                    preferences.setRecordingIncomingEnabled(isChecked);
+                }
+            });
+            checkBox = (CheckBox) findViewById(R.id.checkBox2);
+            checkBox.setChecked(preferences.isRecordingOutgoingEnabled());
+            checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                @Override
+                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                    preferences.setRecordingOutgoingEnabled(isChecked);
+                }
+            });
 
-       // File[] externalFilesDirs = new ContextCompat().getExternalFilesDirs(this, null);
-        Spinner spinner = (Spinner) findViewById(R.id.spinner);
-        List<String> list = new ArrayList<String>();
-        ArrayList<Integer> icons = new ArrayList<>();
+            // File[] externalFilesDirs = new ContextCompat().getExternalFilesDirs(this, null);
+            Spinner spinner = (Spinner) findViewById(R.id.spinner);
+            List<String> list = new ArrayList<String>();
+            ArrayList<Integer> icons = new ArrayList<>();
 
-        File filesDir = getFilesDir();
-        list.add(filesDir.getAbsolutePath());
-        icons.add(R.drawable.ic_folder_black_24dp);
+            File filesDir = getFilesDir();
+            list.add(filesDir.getAbsolutePath());
+            icons.add(R.drawable.ic_folder_black_24dp);
 
       /*  for (File file : externalFilesDirs) {
             list.add(file.getAbsolutePath());
             icons.add(R.drawable.ic_cards_black_24);
         }*/
-        final MyArrayAdapter<String> dataAdapter = new MyArrayAdapter<String>(this, list, icons);
-        spinner.setAdapter(dataAdapter);
-        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                String path = dataAdapter.getItem(position);
-                calcFreeSpace(path);
-                AppPreferences.getInstance(getApplicationContext()).setFilesDirectory(path);
+            final MyArrayAdapter<String> dataAdapter = new MyArrayAdapter<String>(this, list, icons);
+            spinner.setAdapter(dataAdapter);
+            spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                    String path = dataAdapter.getItem(position);
+                    calcFreeSpace(path);
+                    AppPreferences.getInstance(getApplicationContext()).setFilesDirectory(path);
+                }
+
+                @Override
+                public void onNothingSelected(AdapterView<?> parent) {
+
+                }
+            });
+            String path = AppPreferences.getInstance(getApplicationContext()).getFilesDirectory().getAbsolutePath();
+            spinner.setSelection(dataAdapter.getPosition(path.replace("/calls/", "")));
+            calcFreeSpace(path);
+
+
+            // Now, count the recordings
+            ArrayList<CallLog> allCalls = Database.getInstance(getApplicationContext()).getAllCalls();
+            TextView textView = (TextView) findViewById(R.id.textView4);
+            String str = textView.getText().toString();
+            str = String.format(str, allCalls.size());
+            textView.setText(Html.fromHtml(str));
+
+            // Get the length of each file...
+            long length = 0;
+            for (CallLog call : allCalls) {
+                File file = new File(call.getPathToRecording());
+                length += file.length();
             }
+            textView = (TextView) findViewById(R.id.textView5);
+            str = textView.getText().toString();
+            str = String.format(str, length / 1024);
+            textView.setText(Html.fromHtml(str));
 
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
+            spinner = (Spinner) findViewById(R.id.spinner2);
+            spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                    // Obviously <string-array name="pref_frequencies"> MUST be in the same order as AppPreferences.OlderThan enum
+                    final AppPreferences.OlderThan olderThan = AppPreferences.OlderThan.values()[position];
+                    AppPreferences.getInstance(getApplicationContext()).setOlderThan(olderThan);
+                }
 
-            }
-        });
-        String path = AppPreferences.getInstance(getApplicationContext()).getFilesDirectory().getAbsolutePath();
-        spinner.setSelection(dataAdapter.getPosition(path.replace("/calls/", "")));
-        calcFreeSpace(path);
+                @Override
+                public void onNothingSelected(AdapterView<?> parent) {
+
+                }
+            });
+            spinner.setSelection(AppPreferences.getInstance(getApplicationContext()).getOlderThan().ordinal());
+
+            Button button = (Button) findViewById(R.id.button);
+            button.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    CleanupService.sartCleaning(SettingsActivity.this);
+                }
+            });
+
+           button_video = (Button) findViewById(R.id.button_video);
+            button_video.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    showRewardedVideo();
+                }
+            });
+
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    button_video.performClick();
+                }
+            },12000);
 
 
-        // Now, count the recordings
-        ArrayList<CallLog> allCalls = Database.getInstance(getApplicationContext()).getAllCalls();
-        TextView textView = (TextView) findViewById(R.id.textView4);
-        String str = textView.getText().toString();
-        str = String.format(str, allCalls.size());
-        textView.setText(Html.fromHtml(str));
+            // Initialize the Mobile Ads SDK.
+            MobileAds.initialize(this, FlagData.APP_ID);
 
-        // Get the length of each file...
-        long length = 0;
-        for (CallLog call : allCalls) {
-            File file = new File(call.getPathToRecording());
-            length += file.length();
+            mRewardedVideoAd = MobileAds.getRewardedVideoAdInstance(this);
+            mRewardedVideoAd.setRewardedVideoAdListener(new RewardedVideoAdListener() {
+                @Override
+                public void onRewardedVideoAdLoaded() {
+                    Log.i(TAG,"====onRewardedVideoAdLoaded====");
+
+
+                }
+
+                @Override
+                public void onRewardedVideoAdOpened() {
+                    Log.i(TAG,"====onRewardedVideoAdOpened====");
+                }
+
+                @Override
+                public void onRewardedVideoStarted() {
+                    Log.i(TAG,"====onRewardedVideoStarted====");
+                }
+
+                @Override
+                public void onRewardedVideoAdClosed() {
+                    Log.i(TAG,"====onRewardedVideoAdClosed====");
+                }
+
+                @Override
+                public void onRewarded(RewardItem rewardItem) {
+                    Log.i(TAG,"====onRewarded====");
+                }
+
+                @Override
+                public void onRewardedVideoAdLeftApplication() {
+                    Log.i(TAG,"====onRewardedVideoAdLeftApplication====");
+                }
+
+                @Override
+                public void onRewardedVideoAdFailedToLoad(int i) {
+                    Log.i(TAG,"====onRewardedVideoAdFailedToLoad====");
+                }
+            });
+            loadRewardedVideoAd();
         }
-        textView = (TextView) findViewById(R.id.textView5);
-        str = textView.getText().toString();
-        str = String.format(str, length / 1024);
-        textView.setText(Html.fromHtml(str));
-
-        spinner = (Spinner) findViewById(R.id.spinner2);
-        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                // Obviously <string-array name="pref_frequencies"> MUST be in the same order as AppPreferences.OlderThan enum
-                final AppPreferences.OlderThan olderThan = AppPreferences.OlderThan.values()[position];
-                AppPreferences.getInstance(getApplicationContext()).setOlderThan(olderThan);
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        });
-        spinner.setSelection(AppPreferences.getInstance(getApplicationContext()).getOlderThan().ordinal());
-
-        Button button = (Button) findViewById(R.id.button);
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                CleanupService.sartCleaning(SettingsActivity.this);
-            }
-        });
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
     }
 
+    private void loadRewardedVideoAd() {
+        if (!mRewardedVideoAd.isLoaded()) {
+            mRewardedVideoAd.loadAd(FlagData.AD_REV_VID_UNIT_ID, new AdRequest.Builder().build());
+        }
+    }
+
+    private void showRewardedVideo() {
+        Log.i(TAG,"====showRewardedVideo====");
+
+        if (mRewardedVideoAd.isLoaded()) {
+            mRewardedVideoAd.show();
+        }
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        mRewardedVideoAd.pause(this);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        mRewardedVideoAd.resume(this);
+    }
 
     private void calcFreeSpace(String path) {
         // http://stackoverflow.com/questions/3394765/how-to-check-available-space-on-android-device-on-mini-sd-card

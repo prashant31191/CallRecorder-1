@@ -119,7 +119,12 @@
         android:layout_height="wrap_content"
         android:text="@string/pref_automatic_cleaning_now"
         android:id="@+id/button" />
-
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorControlHighlight"
+            android:text="@string/pref_recording_show_video"
+            android:id="@+id/button_video" />
     </LinearLayout>
 
 </ScrollView>

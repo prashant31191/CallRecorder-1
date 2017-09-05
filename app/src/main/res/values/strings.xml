@@ -80,6 +80,7 @@ href="https://play.google.com/store/apps/developer?id=JL+Creative+Software">Goog
     <string name="pref_automatic_cleaning_frequency">Delete Recordings:</string>
     <string name="pref_automatic_cleaning_now">Clean Now</string>
     <string name="pref_recording_category">Recording</string>
+    <string name="pref_recording_show_video">Show Video</string>
 
     <string-array name="pref_frequencies">
         <item name="never">Never</item>
