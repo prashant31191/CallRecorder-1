@@ -230,10 +230,10 @@ public class ActAllMessageBox extends Activity implements OnClickListener {
                 // The Cursor is now set to the right position
 
                 id = "";//c.getString(c.getColumnIndex("_id"));
-                number = c.getString(c.getColumnIndex("snippet")) + " # "+  c.getString(c.getColumnIndex("msg_count"));
+                number = "Mssages # "+  c.getString(c.getColumnIndex("msg_count"));
                 message = c.getString(c.getColumnIndex("snippet"));
                 thread_id = c.getString(c.getColumnIndex("thread_id"));
-                data = c.getString(c.getColumnIndex("snippet"));
+                data = "0";//c.getString(c.getColumnIndex("snippet"));
 
                 mArrayListMessage.add(new MessageModel(id,number,message,thread_id,data));
             }
