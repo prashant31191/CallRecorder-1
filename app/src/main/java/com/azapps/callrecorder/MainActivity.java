@@ -1,6 +1,7 @@
 package com.azapps.callrecorder;
 
 import android.Manifest;
+import android.app.PendingIntent;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -29,6 +30,8 @@ import android.widget.CompoundButton;
 import android.widget.MediaController;
 import android.widget.Toast;
 
+import com.Utils.App;
+import com.alarm.AlarmManagerBroadcastReceiver;
 import com.azapps.database.CallLog;
 import com.azapps.database.Database;
 import com.azapps.helpers.AboutDialog;
@@ -94,6 +97,25 @@ public class MainActivity extends AppCompatActivity implements RecordingFragment
         mediaPlayer.setOnCompletionListener(this);
 
         RateMeNowDialog.showRateDialog(this, 10);
+
+
+
+
+        Intent intent = new Intent(this, AlarmManagerBroadcastReceiver.class);
+        intent.putExtra("onetime", Boolean.TRUE);
+
+        boolean alarmUp = (PendingIntent.getBroadcast(this, 0,intent,PendingIntent.FLAG_NO_CREATE) != null);
+
+        if (alarmUp)
+        {
+            App.showLog("myTag", "Alarm is already active");
+        }
+        else
+        {
+            App.showLog("myTag", "Alarm is not actived====>start auto now<==");
+            App.startAlarmServices(MainActivity.this);
+        }
+
 
     }
 

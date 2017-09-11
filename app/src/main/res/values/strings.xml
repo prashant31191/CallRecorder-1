@@ -1,6 +1,8 @@
 <resources>
 
     <string name="app_name">AzCallRecorder</string>
+    <string name="notify_record">Record</string>
+    <string name="notify_shutdown">Shutdown</string>
 
     <string name="about_app"><![CDATA[
 <h1>Call Recorder

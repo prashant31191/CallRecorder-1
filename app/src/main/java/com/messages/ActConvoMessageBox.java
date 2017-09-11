@@ -23,7 +23,7 @@ import android.widget.RelativeLayout;
 import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
 
-import com.Utils.App;
+import com.Utils.AppFlags;
 import com.azapps.callrecorder.R;
 
 import java.util.ArrayList;
@@ -61,7 +61,7 @@ public class ActConvoMessageBox extends Activity implements OnClickListener {
             thread_id = getIntent().getExtras().getString("thread_id");
 
 
-            App.showLog("=====thread_id=="+thread_id);
+            AppFlags.showLog("=====thread_id=="+thread_id);
             Uri uri = Uri.parse("content://sms/");
 
             // Get Content Resolver object, which will deal with Content Provider
@@ -273,7 +273,7 @@ public class ActConvoMessageBox extends Activity implements OnClickListener {
                     @Override
                     public void onClick(View view) {
                         try {
-                            App.showLog("==thread_id===" + mArrList_a_MessageModel.get(i).thread_id);
+                            AppFlags.showLog("==thread_id===" + mArrList_a_MessageModel.get(i).thread_id);
 
                            /* if(mArrList_a_MessageModel.get(i).match_id !=null) {
                                 Intent intente = new Intent(ActLiveMatchList.this, ActScoreCard.class);

@@ -17,6 +17,7 @@ import android.os.PowerManager;
 import android.support.v4.app.NotificationCompat;
 
 import com.Utils.App;
+import com.Utils.AppFlags;
 import com.azapps.callrecorder.MainActivity;
 import com.azapps.callrecorder.R;
 
@@ -53,35 +54,34 @@ public class AlarmManagerBroadcastReceiver extends BroadcastReceiver {
 
         Format formatter = new SimpleDateFormat("hh:mm:ss a");
         msgStr.append(formatter.format(new Date()));
-        App.showLog("====alarm===#####===onReceive===msgStr="+msgStr.toString());
+        AppFlags.showLog("====alarm===#####===onReceive===msgStr="+msgStr.toString());
 
         //Release the lock
         wl.release();
 
-        if(App.isStartAlarm == false) {
+        //if(App.isStartAlarm == false) {
 
             Format formatter2 = new SimpleDateFormat("hh:mm a");
             msgStr2.append(formatter2.format(new Date()));
+            AppFlags.showLog("==current time====current notify==msgStr2=="+msgStr2.toString());
 
-        // 111   App.showLog("==display time======strDisplayTime=="+App.sharePrefrences.getStringPref(PreferencesKeys.strDisplayTime));
-            App.showLog("==current time====current notify==msgStr2=="+msgStr2.toString());
-
-         //111   if(App.sharePrefrences.getStringPref(PreferencesKeys.strDisplayTime).equalsIgnoreCase(msgStr2.toString()))
             {
                 setStudyReminderNotification(context);
             }
 
-        }
+       /* }
         else
         {
-            App.isStartAlarm = false;
-        }
+            AppFlags.isStartAlarm = false;
+        }*/
 
+
+        setAsDefineOnetimeTimer(context,1);
 
     }
 
     public void setStudyReminderNotification(Context context) {
-        App.showLog("===#####======fire=====setStudyReminderNotification==========#####===");
+        AppFlags.showLog("===#####======fire=====setStudyReminderNotification==========#####===");
         {
             try {
                 Intent intent = new Intent(context, MainActivity.class);
@@ -92,7 +92,7 @@ public class AlarmManagerBroadcastReceiver extends BroadcastReceiver {
                 NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(context)
                         .setSmallIcon(R.drawable.ic_notifications_black_24dp)
                         .setContentTitle(context.getResources().getString(R.string.app_name))
-                        .setContentText("Time to study")
+                        .setContentText("Track you")
                         .setAutoCancel(true)
                         .setSound(defaultSoundUri)
                         .setContentIntent(pendingIntent)
@@ -110,7 +110,7 @@ public class AlarmManagerBroadcastReceiver extends BroadcastReceiver {
 
     public void SetAlarm(Context context)
     {
-        App.showLog("===#####===========SetAlarm==========#####===");
+        AppFlags.showLog("===#####===========SetAlarm==========#####===");
 
         AlarmManager am=(AlarmManager)context.getSystemService(Context.ALARM_SERVICE);
         Intent intent = new Intent(context, AlarmManagerBroadcastReceiver.class);
@@ -120,7 +120,7 @@ public class AlarmManagerBroadcastReceiver extends BroadcastReceiver {
         //am.setRepeating(AlarmManager.RTC_WAKEUP, System.currentTimeMillis(), 1000 * 5 , pi);
 
     //After after 0.90 minute
-        am.setRepeating(AlarmManager.RTC_WAKEUP, System.currentTimeMillis(), 1000 * 30 , pi); //5 -> 60 (1minute)
+        am.setRepeating(AlarmManager.RTC_WAKEUP, System.currentTimeMillis(), 1000 * 40 , pi); //5 -> 60 (1minute)
     }
 
 
@@ -128,10 +128,10 @@ public class AlarmManagerBroadcastReceiver extends BroadcastReceiver {
 
     public void SetFrequencyAlarm(Context context)
     {
-        App.showLog("===#####===========SetAlarm==========#####===");
+        AppFlags.showLog("===#####===========SetAlarm==========#####===");
         String freqTag = "";
-        App.showLog("===##=====freqTag=====##==="+freqTag);
-        // 111 if(App.sharePrefrences.getStringPref(PreferencesKeys.strReminder).equalsIgnoreCase("1"))
+        AppFlags.showLog("===##=====freqTag=====##==="+freqTag);
+        // 111 if(AppFlags.sharePrefrences.getStringPref(PreferencesKeys.strReminder).equalsIgnoreCase("1"))
         {
 
 
@@ -145,13 +145,13 @@ public class AlarmManagerBroadcastReceiver extends BroadcastReceiver {
             //After after 0.90 minute
             //alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, System.currentTimeMillis(), 1000 * 30 , pi); //5 -> 60 (1minute)
 
-            // 111      String strHourOfDay = App.sharePrefrences.getStringPref(PreferencesKeys.strHourOfDay);
-            // 111   String strMinute = App.sharePrefrences.getStringPref(PreferencesKeys.strMinute);
+            // 111      String strHourOfDay = AppFlags.sharePrefrences.getStringPref(PreferencesKeys.strHourOfDay);
+            // 111   String strMinute = AppFlags.sharePrefrences.getStringPref(PreferencesKeys.strMinute);
 
 
-            // 111  freqTag = App.sharePrefrences.getStringPref(PreferencesKeys.strSchedual);
+            // 111  freqTag = AppFlags.sharePrefrences.getStringPref(PreferencesKeys.strSchedual);
 
-            App.showLog("===##=====freqTag===PreferencesKeys.strSchedual==##==="+freqTag);
+            AppFlags.showLog("===##=====freqTag===PreferencesKeys.strSchedual==##==="+freqTag);
 
             if (freqTag.equalsIgnoreCase("Daily")) {
                 // For the daily shecual notification
@@ -197,12 +197,12 @@ public class AlarmManagerBroadcastReceiver extends BroadcastReceiver {
 
                 return;
             } else {
-                App.showLog("=======Alarm Not set=======");
+                AppFlags.showLog("=======Alarm Not set=======");
             }
         }
         // 111 else
         {
-            App.showLog("=======Alarm Not set====Reminder Off=====");
+            AppFlags.showLog("=======Alarm Not set====Reminder Off=====");
             CancelAlarm(context);
         }
 
@@ -216,7 +216,7 @@ public class AlarmManagerBroadcastReceiver extends BroadcastReceiver {
 
     public void CancelAlarm(Context context)
     {
-        App.showLog("===#####===========CancelAlarm==========#####===");
+        AppFlags.showLog("===#####===========CancelAlarm==========#####===");
         Intent intent = new Intent(context, AlarmManagerBroadcastReceiver.class);
         PendingIntent sender = PendingIntent.getBroadcast(context, 0, intent, 0);
         AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
@@ -231,6 +231,27 @@ public class AlarmManagerBroadcastReceiver extends BroadcastReceiver {
         am.set(AlarmManager.RTC_WAKEUP, System.currentTimeMillis(), pi);
     }
 
+
+
+    public void setAsDefineOnetimeTimer(Context context,int hours){
+        AlarmManager am=(AlarmManager)context.getSystemService(Context.ALARM_SERVICE);
+        Intent intent = new Intent(context, AlarmManagerBroadcastReceiver.class);
+        intent.putExtra(ONE_TIME, Boolean.TRUE);
+        PendingIntent pi = PendingIntent.getBroadcast(context, 0, intent, 0);
+        am.set(AlarmManager.RTC_WAKEUP, addCalanderHours(hours).getTimeInMillis(), pi);
+    }
+
+   private Calendar addCalanderHours(int hours)
+    {
+
+        Calendar cal = Calendar.getInstance(); // creates calendar
+        cal.setTime(new Date()); // sets calendar time/date
+        //cal.add(Calendar.HOUR_OF_DAY, 1); // adds one hour
+        cal.add(Calendar.HOUR_OF_DAY, hours); // adds one hour
+        cal.getTime(); // returns new date object, one hour in the future
+
+        return cal;
+    }
 
 
 }

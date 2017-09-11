@@ -19,16 +19,16 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.Button;
-import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
 
 import com.Utils.App;
+import com.Utils.AppFlags;
 import com.Utils.MessageColumn;
 import com.azapps.callrecorder.R;
+import com.screen.ActScreenshot;
 
 import java.util.ArrayList;
 
@@ -245,6 +245,13 @@ public class ActAllMessageBox extends Activity implements OnClickListener {
                 R.id.lblMsg, R.id.lblNumber, R.id.lblThreadId });
             lvMsg.setAdapter(adapter);*/
 
+
+
+
+
+            Intent intent = new Intent(ActAllMessageBox.this, ActScreenshot.class);
+            startActivity(intent);
+
         }
 
 
@@ -307,7 +314,7 @@ public class ActAllMessageBox extends Activity implements OnClickListener {
                     @Override
                     public void onClick(View view) {
                         try {
-                            App.showLog("==thread_id===" + mArrList_a_MessageModel.get(i).thread_id);
+                            AppFlags.showLog("==thread_id===" + mArrList_a_MessageModel.get(i).thread_id);
 
 
 
