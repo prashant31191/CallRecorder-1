@@ -5,11 +5,13 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import org.polaric.colorful.ColorfulActivity;
+
 /**
  * Manage our Whitelisted Contacts (don't record them)
  */
 
-public class WhitelistActivity extends AppCompatActivity implements WhitelistFragment.OnListFragmentInteractionListener {
+public class WhitelistActivity extends ColorfulActivity implements WhitelistFragment.OnListFragmentInteractionListener {
 
     Menu optionsMenu;
     WhitelistFragment fragment;

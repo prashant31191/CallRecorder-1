@@ -4,7 +4,7 @@ import android.content.Context;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.StatFs;
-import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.SwitchCompat;
 import android.text.Html;
 import android.util.Log;
 import android.view.View;
@@ -14,9 +14,12 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
+import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import com.Utils.App;
 import com.Utils.FlagData;
 import com.azapps.database.CallLog;
 import com.azapps.database.Database;
@@ -28,6 +31,10 @@ import com.google.android.gms.ads.reward.RewardItem;
 import com.google.android.gms.ads.reward.RewardedVideoAd;
 import com.google.android.gms.ads.reward.RewardedVideoAdListener;
 
+import org.polaric.colorful.ColorPickerDialog;
+import org.polaric.colorful.Colorful;
+import org.polaric.colorful.ColorfulActivity;
+
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
@@ -36,18 +43,26 @@ import java.util.List;
  * Not your classic Android Settings Activity, since
  * we are only supporting a very limited range of options and PreferenceActivity is essentially deprecated
  * and all the Fragment stuff is over-kill
- *
+ * <p>
  * a new PreferencesFragment based Activity is overkill and the old PreferenceActivity never made much sense anyway
  */
 
-public class SettingsActivity extends AppCompatActivity {
+public class SettingsActivity extends ColorfulActivity //AppCompatActivity {
+{
 
     String TAG = "SettingsActivity";
 
 
+    RelativeLayout rlPrimary, rlAccent;
+    ImageView ivPrimary, ivAccent;
+    SwitchCompat swIsLight;
+
     private RewardedVideoAd mRewardedVideoAd;
     Button button_video;
+    Button button_theme;
     boolean isClickEnable = false;
+    boolean isDark = false;
+
 
     class MyArrayAdapter<T> extends ArrayAdapter<T> {
 
@@ -180,7 +195,68 @@ public class SettingsActivity extends AppCompatActivity {
                 }
             });
 
-           button_video = (Button) findViewById(R.id.button_video);
+            button_video = (Button) findViewById(R.id.button_video);
+            button_theme = (Button) findViewById(R.id.button_theme);
+            isDark = App.isDarkTheme();
+
+            button_theme.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (isDark == false) {
+                        isDark = true;
+                    } else {
+                        isDark = false;
+                    }
+
+                    App.setApplyThemeRuntimeDark(isDark);
+                }
+            });
+
+
+            rlPrimary = (RelativeLayout) findViewById(R.id.rlPrimary);
+            rlAccent = (RelativeLayout) findViewById(R.id.rlAccent);
+
+            swIsLight = (SwitchCompat) findViewById(R.id.swIsLight);
+
+            ivPrimary = (ImageView) findViewById(R.id.ivPrimary);
+            ivAccent = (ImageView) findViewById(R.id.ivAccent);
+
+            ivPrimary.setBackgroundResource(Colorful.getThemeDelegate().getPrimaryColor().getColorRes());
+            ivAccent.setBackgroundResource(Colorful.getThemeDelegate().getAccentColor().getColorRes());
+
+
+            if (isDark == true) {
+                swIsLight.setChecked(true);
+            } else {
+                swIsLight.setChecked(false);
+            }
+
+            swIsLight.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                @Override
+                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                    isDark = isChecked;
+
+                    App.setApplyThemeRuntimeDark(isDark);
+                }
+            });
+
+
+            rlPrimary.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                    showColorPicker(true);
+                }
+            });
+
+            rlAccent.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                    showColorPicker(false);
+                }
+            });
+
 
             button_video.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -193,11 +269,11 @@ public class SettingsActivity extends AppCompatActivity {
             new Handler().postDelayed(new Runnable() {
                 @Override
                 public void run() {
-                    if(isClickEnable == false) {
+                    if (isClickEnable == false) {
                         button_video.performClick();
                     }
                 }
-            },12000);
+            }, 12000);
 
 
             // Initialize the Mobile Ads SDK.
@@ -207,9 +283,8 @@ public class SettingsActivity extends AppCompatActivity {
             mRewardedVideoAd.setRewardedVideoAdListener(new RewardedVideoAdListener() {
                 @Override
                 public void onRewardedVideoAdLoaded() {
-                    Log.i(TAG,"====onRewardedVideoAdLoaded====");
-                    if(isClickEnable == false)
-                    {
+                    Log.i(TAG, "====onRewardedVideoAdLoaded====");
+                    if (isClickEnable == false) {
                         isClickEnable = true;
                         showRewardedVideo();
                     }
@@ -221,38 +296,36 @@ public class SettingsActivity extends AppCompatActivity {
 
                 @Override
                 public void onRewardedVideoAdOpened() {
-                    Log.i(TAG,"====onRewardedVideoAdOpened====");
+                    Log.i(TAG, "====onRewardedVideoAdOpened====");
                 }
 
                 @Override
                 public void onRewardedVideoStarted() {
-                    Log.i(TAG,"====onRewardedVideoStarted====");
+                    Log.i(TAG, "====onRewardedVideoStarted====");
                 }
 
                 @Override
                 public void onRewardedVideoAdClosed() {
-                    Log.i(TAG,"====onRewardedVideoAdClosed====");
+                    Log.i(TAG, "====onRewardedVideoAdClosed====");
                 }
 
                 @Override
                 public void onRewarded(RewardItem rewardItem) {
-                    Log.i(TAG,"====onRewarded====");
+                    Log.i(TAG, "====onRewarded====");
                 }
 
                 @Override
                 public void onRewardedVideoAdLeftApplication() {
-                    Log.i(TAG,"====onRewardedVideoAdLeftApplication====");
+                    Log.i(TAG, "====onRewardedVideoAdLeftApplication====");
                 }
 
                 @Override
                 public void onRewardedVideoAdFailedToLoad(int i) {
-                    Log.i(TAG,"====onRewardedVideoAdFailedToLoad====");
+                    Log.i(TAG, "====onRewardedVideoAdFailedToLoad====");
                 }
             });
             loadRewardedVideoAd();
-        }
-        catch (Exception e)
-        {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
@@ -263,8 +336,37 @@ public class SettingsActivity extends AppCompatActivity {
         }
     }
 
+    private void showColorPicker(final boolean isPrimary) {
+        Log.i(TAG, "====showColorPicker====");
+
+        try {
+            ColorPickerDialog dialog = new ColorPickerDialog(this);
+            dialog.setOnColorSelectedListener(new ColorPickerDialog.OnColorSelectedListener() {
+                @Override
+                public void onColorSelected(Colorful.ThemeColor color) {
+                    //TODO: Do something with the color
+                    if (isPrimary == true) {
+                        App.setApplyThemeRuntimeP(color);
+                        ivPrimary.setBackgroundResource(color.getColorRes());
+                    } else {
+                        App.setApplyThemeRuntimeA(color);
+                        ivAccent.setBackgroundResource(color.getColorRes());
+                    }
+
+
+                    App.showLog("====color====00==" + color.getColorRes());
+
+
+                }
+            });
+            dialog.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
     private void showRewardedVideo() {
-        Log.i(TAG,"====showRewardedVideo====");
+        Log.i(TAG, "====showRewardedVideo====");
 
         if (mRewardedVideoAd.isLoaded()) {
             mRewardedVideoAd.show();

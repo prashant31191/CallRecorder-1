@@ -10,7 +10,9 @@ import android.content.Intent;
 import android.media.projection.MediaProjectionManager;
 import android.os.Bundle;
 
-public class ActScreenshot extends Activity {
+import org.polaric.colorful.ColorfulActivity;
+
+public class ActScreenshot extends ColorfulActivity {
     private static final int REQUEST_SCREENSHOT=59706;
     private MediaProjectionManager mgr;
 

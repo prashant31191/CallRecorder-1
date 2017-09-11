@@ -11,14 +11,16 @@ import android.os.Bundle;
         import android.support.v7.app.AppCompatActivity;
         import android.widget.FrameLayout;
 
-        import butterknife.BindView;
+import org.polaric.colorful.ColorfulActivity;
+
+import butterknife.BindView;
         import butterknife.ButterKnife;
 
 /**
  * Created by shuyu on 2016/11/15.
  * 声音波形，录制与播放
  */
-public class ActRecording extends AppCompatActivity {
+public class ActRecording extends ColorfulActivity {
 
 
     @BindView(R.id.main_frameLayout)

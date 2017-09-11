@@ -84,6 +84,7 @@ href="https://play.google.com/store/apps/developer?id=JL+Creative+Software">Goog
     <string name="pref_automatic_cleaning_now">Clean Now</string>
     <string name="pref_recording_category">Recording</string>
     <string name="pref_recording_show_video">Show Video</string>
+    <string name="pref_change_theme">Change theme Light / Dark</string>
     <string name="replied">replied</string>
     <string name="reply">reply</string>
 

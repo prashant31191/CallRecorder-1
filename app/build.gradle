@@ -25,6 +25,11 @@ android {
     }
     productFlavors {
     }
+
+    lintOptions {
+        abortOnError false
+        checkReleaseBuilds false
+    }
 }
 
 dependencies {
@@ -38,11 +43,19 @@ dependencies {
     implementation 'com.google.android.gms:play-services-ads:11.0.1'
     compile project(path: ':helpers')
    // compile project(path: ':googleadssdk')
+    compile project(':library')
 
     //for simple recording
     compile 'com.github.CarGuo:RecordWave:v1.1.3'
 
     compile 'com.jakewharton:butterknife:8.8.1'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
+
+   /* // for multi color theme
+    compile 'com.github.garretyoder:Colorful:1.1'*/
+
+   /* compile('com.github.garretyoder:app-theme-engine:1.5@aar') {
+        transitive = true
+    }*/
 
 }

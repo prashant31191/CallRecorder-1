@@ -14,6 +14,7 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.Signature;
 import android.content.res.Resources;
+import android.content.res.TypedArray;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.Matrix;
@@ -32,6 +33,7 @@ import android.text.TextUtils;
 import android.util.Base64;
 import android.util.DisplayMetrics;
 import android.util.Log;
+import android.util.TypedValue;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
@@ -50,6 +52,7 @@ import com.azapps.callrecorder.R;
 import com.google.android.gms.common.api.GoogleApiClient;
 import org.json.JSONArray;
 import org.json.JSONObject;
+import org.polaric.colorful.Colorful;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -178,18 +181,126 @@ public class App extends Application {
 
         try {
            // MultiDex.install(this);
+            Colorful.defaults()
+                    .primaryColor(Colorful.ThemeColor.RED)
+                    .accentColor(Colorful.ThemeColor.BLUE)
+                    .translucent(false)
+                    .dark(true);
+
+            Colorful.init(this);
+
+
             mContext = getApplicationContext();
             sharePrefrences = new SharePrefrences(App.this);
             getFont_Regular();
             getFont_Bold();
             createAppFolder();
 
+            //setApplyTheme();
+
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
+    public static void setApplyTheme()
+    {
+        Colorful.defaults()
+                .primaryColor(Colorful.ThemeColor.RED)
+                .accentColor(Colorful.ThemeColor.BLUE)
+                .translucent(false)
+                .dark(true);
+        Colorful.init(mContext);
+    }
 
+
+    public static void setApplyThemeRuntime(Colorful.ThemeColor primary,Colorful.ThemeColor accent)
+    {
+        Colorful.config(mContext)
+                .primaryColor(primary)
+                .accentColor(accent)
+                .translucent(false)
+                .dark(true)
+                .apply();
+    }
+
+
+    public static void setApplyThemeRuntimeP(Colorful.ThemeColor primary)
+    {
+        App.showLog("====setApplyThemeRuntimeP====00=="+primary.getColorRes());
+        Colorful.config(mContext)
+                .primaryColor(primary)
+                .translucent(false)
+                .dark(true)
+                .apply();
+    }
+
+
+
+    public static void setApplyThemeRuntimeA(Colorful.ThemeColor accent)
+    {
+        App.showLog("====setApplyThemeRuntimeA====00=="+accent.getColorRes());
+
+        Colorful.config(mContext)
+                .accentColor(accent)
+                .translucent(false)
+                .dark(true)
+                .apply();
+    }
+    public static void setApplyThemeRuntimeDark(boolean isDark)
+    {
+        App.showLog("====setApplyThemeRuntimeDark====00=="+isDark);
+
+        Colorful.config(mContext)
+                .translucent(false)
+                .dark(isDark)
+                .apply();
+    }
+
+
+    public static int fetchPrimaryColor() {
+        TypedValue typedValue = new TypedValue();
+
+        mContext.getTheme().resolveAttribute(R.attr.colorPrimary, typedValue, true);
+        int color = typedValue.data;
+
+/*
+
+        TypedArray a = mContext.obtainStyledAttributes(typedValue.data, new int[] { R.attr.colorPrimary });
+        int color = a.getColor(0, 0);
+
+
+        a.recycle();
+*/
+        color = Colorful.getThemeDelegate().getPrimaryColor().getColorRes();
+        App.showLog("====p=color=="+color);
+
+        return color;
+    }
+
+    public static int fetchAccentColor() {
+        TypedValue typedValue = new TypedValue();
+
+        mContext.getTheme().resolveAttribute(R.attr.colorAccent, typedValue, true);
+        int color = typedValue.data;
+
+ /*       TypedArray a = mContext.obtainStyledAttributes(typedValue.data, new int[] { R.attr.colorAccent });
+        int color = a.getColor(0, 0);
+
+        a.recycle();
+ */
+
+
+
+        color = Colorful.getThemeDelegate().getAccentColor().getColorRes();
+        App.showLog("====a=color=="+color);
+        return color;
+    }
+
+    public static boolean isDarkTheme()
+    {
+        return  Colorful.getThemeDelegate().isDark();
+    }
 
     public static Bitmap RotateBitmap(Bitmap source, float angle) {
         Matrix matrix = new Matrix();

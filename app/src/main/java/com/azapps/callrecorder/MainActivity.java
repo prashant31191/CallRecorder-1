@@ -40,6 +40,8 @@ import com.messages.ActAllMessageBox;
 import com.messages.ActMessages;
 import com.messages.ActMyMessages;
 
+import org.polaric.colorful.ColorfulActivity;
+
 import java.io.File;
 import java.util.ArrayList;
 
@@ -49,7 +51,7 @@ import java.util.ArrayList;
  *
  */
 
-public class MainActivity extends AppCompatActivity implements RecordingFragment.OnListFragmentInteractionListener, MediaPlayer.OnPreparedListener, MediaPlayer.OnCompletionListener, MediaController.MediaPlayerControl {
+public class MainActivity extends ColorfulActivity implements RecordingFragment.OnListFragmentInteractionListener, MediaPlayer.OnPreparedListener, MediaPlayer.OnCompletionListener, MediaController.MediaPlayerControl {
 
     /**
      * The {@link android.support.v4.view.PagerAdapter} that will provide

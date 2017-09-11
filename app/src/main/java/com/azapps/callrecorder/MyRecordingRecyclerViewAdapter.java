@@ -1,6 +1,7 @@
 package com.azapps.callrecorder;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.content.ContentUris;
 import android.content.Context;
 import android.content.Intent;
@@ -27,6 +28,8 @@ import com.azapps.callrecorder.RecordingFragment.OnListFragmentInteractionListen
 import com.azapps.database.CallLog;
 import com.azapps.database.Database;
 import com.azapps.receivers.MyLocalBroadcastReceiver;
+
+import org.polaric.colorful.Colorful;
 
 import java.io.InputStream;
 import java.text.SimpleDateFormat;
@@ -170,6 +173,9 @@ public class MyRecordingRecyclerViewAdapter extends RecyclerView.Adapter<MyRecor
         holder.mItem = mValues.get(position);
         holder.mContactName.setText(holder.mItem.getName());
 
+
+
+
         if (holder.mItem.getPhoneCall().isKept()) {
             holder.mContactName.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_lock_black_24dp,0);
         } else {
@@ -270,6 +276,7 @@ public class MyRecordingRecyclerViewAdapter extends RecyclerView.Adapter<MyRecor
 
         public PhoneCallRecord mItem;
 
+        //@SuppressLint("ResourceAsColor")
         public ViewHolder(View view) {
             super(view);
             mView = view;
@@ -280,6 +287,8 @@ public class MyRecordingRecyclerViewAdapter extends RecyclerView.Adapter<MyRecor
             mTimeView = (TextView) view.findViewById(R.id.textView3);
             mDateView = (TextView) view.findViewById(R.id.textView4);
             mPlayBtn = (ImageButton) view.findViewById(R.id.imageButton2);
+
+            //mContactName.setTextColor(Colorful.getThemeDelegate().getPrimaryColor().getColorRes());
         }
 
         @Override

@@ -26,6 +26,8 @@ import com.piterwilson.audio.MP3RadioStreamDelegate;
 import com.piterwilson.audio.MP3RadioStreamPlayer;
 import com.shuyu.waveview.AudioWaveView;
 
+import org.polaric.colorful.ColorfulActivity;
+
 import java.io.File;
 import java.io.IOException;
 import java.util.Timer;
@@ -39,7 +41,7 @@ import static com.azapps.callrecorder.MainFragment.dip2px;
 import static com.azapps.callrecorder.MainFragment.getScreenWidth;
 
 
-public class WavePlayActivity extends AppCompatActivity implements MP3RadioStreamDelegate {
+public class WavePlayActivity extends ColorfulActivity implements MP3RadioStreamDelegate {
 
     private final static String TAG = "WavePlayActivity";
 

@@ -30,9 +30,11 @@ import com.Utils.MessageColumn;
 import com.azapps.callrecorder.R;
 import com.screen.ActScreenshot;
 
+import org.polaric.colorful.ColorfulActivity;
+
 import java.util.ArrayList;
 
-public class ActAllMessageBox extends Activity implements OnClickListener {
+public class ActAllMessageBox extends ColorfulActivity implements OnClickListener {
 
     
     //  GUI Widget

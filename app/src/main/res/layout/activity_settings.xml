@@ -125,6 +125,77 @@
             android:textColor="@color/colorControlHighlight"
             android:text="@string/pref_recording_show_video"
             android:id="@+id/button_video" />
+
+
+        <RelativeLayout
+            android:id="@+id/rlPrimary"
+            android:layout_width="match_parent"
+            android:layout_height="50dp">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Choose primary theme color"
+                android:textSize="18dp"
+                android:layout_centerVertical="true"
+                />
+
+            <ImageView
+                android:id="@+id/ivPrimary"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_color_lens_black_36dp"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:background="@color/c_red_crayola"
+                />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/rlAccent"
+            android:layout_width="match_parent"
+            android:layout_height="50dp">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Choose accent theme color"
+                android:textSize="18dp"
+                android:layout_centerVertical="true"
+                />
+
+            <ImageView
+                android:id="@+id/ivAccent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_color_lens_black_36dp"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:background="@color/c_red_crayola"
+                />
+
+        </RelativeLayout>
+
+        <android.support.v7.widget.SwitchCompat
+            android:id="@+id/swIsLight"
+            android:text="Set Dark Theme"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"
+            android:textSize="18dp"
+            />
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorControlHighlight"
+            android:text="@string/pref_change_theme"
+            android:id="@+id/button_theme" />
+
+
+
+
+
     </LinearLayout>
 
 </ScrollView>
