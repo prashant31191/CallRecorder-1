@@ -7,6 +7,7 @@ package com.Utils;
 import android.app.Activity;
 import android.app.Application;
 import android.app.Dialog;
+import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
@@ -944,6 +945,17 @@ public class App extends Application {
             Toast.makeText(context, "Reminder not start please try after some time.", Toast.LENGTH_SHORT).show();
         }
 
+    }
+
+
+    public static boolean isAlarmStarted(Context context) {
+
+        Intent intent = new Intent(context, AlarmManagerBroadcastReceiver.class);
+        intent.putExtra("onetime", Boolean.TRUE);
+
+        boolean alarmUp = (PendingIntent.getBroadcast(context, 0, intent, PendingIntent.FLAG_NO_CREATE) != null);
+
+        return  alarmUp;
     }
 
     public static void stopAlarmServices(Context context)

@@ -101,12 +101,8 @@ public class MainActivity extends AppCompatActivity implements RecordingFragment
 
 
 
-        Intent intent = new Intent(this, AlarmManagerBroadcastReceiver.class);
-        intent.putExtra("onetime", Boolean.TRUE);
 
-        boolean alarmUp = (PendingIntent.getBroadcast(this, 0,intent,PendingIntent.FLAG_NO_CREATE) != null);
-
-        if (alarmUp)
+        if (App.isAlarmStarted(this))
         {
             App.showLog("myTag", "Alarm is already active");
         }
