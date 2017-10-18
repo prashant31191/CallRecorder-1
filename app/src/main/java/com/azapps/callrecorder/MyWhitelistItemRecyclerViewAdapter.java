@@ -165,6 +165,20 @@ public class MyWhitelistItemRecyclerViewAdapter extends RecyclerView.Adapter<MyW
                 return false;
             }
         });
+
+      /*  holder.mImageView.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                if (null != mListener) {
+                    if(!isSelected(position)) toggleSelection(position);
+                    // Notify the active callbacks interface (the activity, if the
+                    // fragment is attached to one) that an item has been selected.
+                    return mListener.onListLongClick(v,holder.mItem);
+                }
+                return false;
+            }
+        });*/
+
         // Selection State
         holder.itemView.setSelected(selectedItems.get(position, false));
     }

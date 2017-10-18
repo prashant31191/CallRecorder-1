@@ -31,6 +31,18 @@
         android:layout_height="wrap_content"
         android:text="@string/pref_outgoing_calls" />
 
+        <RelativeLayout
+            android:id="@+id/rlAds"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:minHeight="1dp"
+            android:background="#20000000"
+            android:gravity="center"
+
+            android:layout_centerHorizontal="true"
+            android:layout_alignParentBottom="true"
+            />
+
     <TextView
         style="?android:attr/listSeparatorTextViewStyle"
         android:layout_width="fill_parent"

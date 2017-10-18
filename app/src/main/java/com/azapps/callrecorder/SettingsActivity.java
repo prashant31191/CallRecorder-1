@@ -26,7 +26,10 @@ import com.azapps.database.CallLog;
 import com.azapps.database.Database;
 import com.azapps.receivers.MyAlarmReceiver;
 import com.azapps.services.CleanupService;
+import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdSize;
+import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.MobileAds;
 import com.google.android.gms.ads.reward.RewardItem;
 import com.google.android.gms.ads.reward.RewardedVideoAd;
@@ -101,7 +104,7 @@ public class SettingsActivity extends ColorfulActivity //AppCompatActivity {
         super.onCreate(savedInstanceState);
         try {
             setContentView(R.layout.activity_settings);
-
+            layout = (RelativeLayout) findViewById(R.id.rlAds);
 
             preferences = AppPreferences.getInstance(this);
 
@@ -330,12 +333,74 @@ public class SettingsActivity extends ColorfulActivity //AppCompatActivity {
 
             loadRewardedVideoAd();
 
-
+            setDisplayBanner();
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
+
+
+    AdView mAdView;
+    RelativeLayout layout;
+    private void setDisplayBanner()
+    {
+
+
+        //String deviceid = tm.getDeviceId();
+
+        mAdView = new AdView(SettingsActivity.this);
+        mAdView.setAdSize(AdSize.BANNER);
+        mAdView.setAdUnitId(FlagData.strBnrId);
+
+        // Add the AdView to the view hierarchy. The view will have no size
+        // until the ad is loaded.
+        layout.addView(mAdView);
+
+        // Create an ad request. Check logcat output for the hashed device ID to
+        // get test ads on a physical device.
+        AdRequest adRequest = new AdRequest.Builder()
+                .addTestDevice("33BE2250B43518CCDA7DE426D04EE232")
+                .build();
+        //.addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
+        //.addTestDevice(deviceid).build();
+
+        // Start loading the ad in the background.
+        mAdView.loadAd(adRequest);
+        mAdView.setAdListener(new AdListener() {
+            @Override
+            public void onAdLoaded() {
+                // Code to be executed when an ad finishes loading.
+                Log.i("Ads", "onAdLoaded");
+            }
+
+            @Override
+            public void onAdFailedToLoad(int errorCode) {
+                // Code to be executed when an ad request fails.
+                Log.i("Ads", "onAdFailedToLoad");
+            }
+
+            @Override
+            public void onAdOpened() {
+                // Code to be executed when an ad opens an overlay that
+                // covers the screen.
+                Log.i("Ads", "onAdOpened");
+            }
+
+            @Override
+            public void onAdLeftApplication() {
+                // Code to be executed when the user has left the app.
+                Log.i("Ads", "onAdLeftApplication");
+            }
+
+            @Override
+            public void onAdClosed() {
+                // Code to be executed when when the user is about to return
+                // to the app after tapping on an ad.
+                Log.i("Ads", "onAdClosed");
+            }
+        });
+    }
     private void openDonateScreen()
     {
         App.showToastLong(SettingsActivity.this,"Donate For Developer support \n \n Thank you");

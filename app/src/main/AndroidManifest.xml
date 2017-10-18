@@ -107,16 +107,19 @@
         -->
         <activity
             android:name="com.azapps.callrecorder.WhitelistActivity"
-            android:parentActivityName="com.azapps.callrecorder.MainActivity" />
+            android:label="@string/title_activity_whitelist"
+            android:parentActivityName="com.azapps.callrecorder.MainActivity" >
         <!-- The meta-data element is needed for versions lower than 4.1 -->
         <meta-data
             android:name="android.support.PARENT_ACTIVITY"
             android:value="com.azapps.callrecorder.MainActivity" />
+        </activity>
 
         <activity
             android:name="com.azapps.callrecorder.SettingsActivity"
             android:label="@string/title_activity_settings"
             android:parentActivityName="com.azapps.callrecorder.MainActivity">
+            <!-- The meta-data element is needed for versions lower than 4.1 -->
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.azapps.callrecorder.MainActivity" />
@@ -177,11 +180,11 @@
 
         <!--for the alarm study reminder-->
         <!--for the Alarm Receiver-->
-        <receiver android:name="com.alarm.AlarmManagerBroadcastReceiver">
+       <!-- <receiver android:name="com.alarm.AlarmManagerBroadcastReceiver">
             <intent-filter>
                 <action android:name="NOTIFICATION_SERVICE" />
             </intent-filter>
-        </receiver>
+        </receiver>-->
 
         <receiver
             android:enabled="true"
