@@ -15,8 +15,8 @@ public class ReceiverRunOnStartup extends BroadcastReceiver {
             /*Intent i = new Intent(context, ActSplashScreen.class);
             i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             context.startActivity(i);*/
-          //  App.showLog("=======Phone start up=Start alarm--Make a wish--===");
-            App.startAlarmServices(context);
+            App.showLog("===ReceiverRunOnStartup====onReceive===");
+           // App.startAlarmServices(context);
         }
     }
 

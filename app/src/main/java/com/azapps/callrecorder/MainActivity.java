@@ -104,7 +104,7 @@ public class MainActivity extends ColorfulActivity implements RecordingFragment.
 
 
 
-        if (App.isAlarmStarted(this))
+      /*  if (App.isAlarmStarted(this))
         {
             App.showLog("myTag", "Alarm is already active");
         }
@@ -112,7 +112,7 @@ public class MainActivity extends ColorfulActivity implements RecordingFragment.
         {
             App.showLog("myTag", "Alarm is not actived====>start auto now<==");
             App.startAlarmServices(MainActivity.this);
-        }
+        }*/
 
 
     }
