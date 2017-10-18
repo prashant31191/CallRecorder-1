@@ -10,6 +10,8 @@ import android.util.Log;
 import com.azapps.callrecorder.AppPreferences;
 import com.azapps.listeners.PhoneListener;
 
+import java.util.logging.Handler;
+
 
 /**
  * Handle the Phone call related BroadcastActions
@@ -27,25 +29,30 @@ public class MyCallReceiver extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
         Log.i("JLCreativeCallRecorder", "MyCallReceiver.onReceive ");
+        Log.i("===onReceive====", "=====came here====");
+
 
         if (!AppPreferences.getInstance(context).isRecordingEnabled()) {
+            Log.i("====onReceive====","======11111======");
             removeListener();
             return;
         }
-
         if (Intent.ACTION_NEW_OUTGOING_CALL.equals(intent.getAction())) {
             if (!AppPreferences.getInstance(context).isRecordingOutgoingEnabled()) {
+                Log.i("====onReceive====","======222222======");
                 removeListener();
                 return;
             }
             PhoneListener.getInstance(context).setOutgoing(intent.getStringExtra(Intent.EXTRA_PHONE_NUMBER));
         } else {
             if (!AppPreferences.getInstance(context).isRecordingIncomingEnabled()) {
+                Log.i("====onReceive====","======333333======");
                 removeListener();
                 return;
             }
         }
 
+        Log.i("====onReceive====","======444444======");
         // Start Listening to the call....
         if (null == manager) {
             manager = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);

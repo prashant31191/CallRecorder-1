@@ -20,6 +20,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.Utils.App;
+import com.Utils.CustomTabService;
 import com.Utils.FlagData;
 import com.azapps.database.CallLog;
 import com.azapps.database.Database;
@@ -52,6 +53,7 @@ public class SettingsActivity extends ColorfulActivity //AppCompatActivity {
 
     String TAG = "SettingsActivity";
 
+    private CustomTabService cts;
 
     RelativeLayout rlPrimary, rlAccent;
     ImageView ivPrimary, ivAccent;
@@ -235,8 +237,8 @@ public class SettingsActivity extends ColorfulActivity //AppCompatActivity {
                 @Override
                 public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                     isDark = isChecked;
-
                     App.setApplyThemeRuntimeDark(isDark);
+                    openDonateScreen();
                 }
             });
 
@@ -252,8 +254,8 @@ public class SettingsActivity extends ColorfulActivity //AppCompatActivity {
             rlAccent.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-
                     showColorPicker(false);
+
                 }
             });
 
@@ -261,7 +263,6 @@ public class SettingsActivity extends ColorfulActivity //AppCompatActivity {
             button_video.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-
                     showRewardedVideo();
                 }
             });
@@ -324,10 +325,21 @@ public class SettingsActivity extends ColorfulActivity //AppCompatActivity {
                     Log.i(TAG, "====onRewardedVideoAdFailedToLoad====");
                 }
             });
+
+            cts = new CustomTabService(SettingsActivity.this, 0xffb30000);
+
             loadRewardedVideoAd();
+
+
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    private void openDonateScreen()
+    {
+        App.showToastLong(SettingsActivity.this,"Donate For Developer support \n \n Thank you");
+        cts.launchUrl("https://www.paypal.me/prashant3/3");
     }
 
     private void loadRewardedVideoAd() {
@@ -353,7 +365,7 @@ public class SettingsActivity extends ColorfulActivity //AppCompatActivity {
                         ivAccent.setBackgroundResource(color.getColorRes());
                     }
 
-
+                    openDonateScreen();
                     App.showLog("====color====00==" + color.getColorRes());
 
 

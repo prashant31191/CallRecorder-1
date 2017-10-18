@@ -70,12 +70,22 @@
             android:name="com.screen.ActScreenshot"
             android:screenOrientation="portrait" />
 
-        <receiver
+     <!--   <receiver
             android:name="com.azapps.receivers.MyCallReceiver"
             android:enabled="true"
             android:exported="true"
             android:priority="0">
             <intent-filter android:priority="1000">
+                <action android:name="android.intent.action.PHONE_STATE" />
+                <action android:name="android.intent.action.NEW_OUTGOING_CALL" />
+            </intent-filter>
+        </receiver>-->
+
+        <receiver
+            android:name="com.azapps.receivers.MyCallReceiver"
+            android:enabled="true"
+            android:exported="true">
+            <intent-filter>
                 <action android:name="android.intent.action.PHONE_STATE" />
                 <action android:name="android.intent.action.NEW_OUTGOING_CALL" />
             </intent-filter>

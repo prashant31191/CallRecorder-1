@@ -1,5 +1,5 @@
 apply plugin: 'com.android.application'
-
+//apply plugin: 'com.github.ben-manes.versions'
 android {
     compileSdkVersion 25
     buildToolsVersion "25.0.2"
@@ -39,8 +39,12 @@ dependencies {
     compile 'com.android.support:design:25.3.1'
     compile 'com.android.support:support-v4:25.3.1'
     compile 'com.android.support:recyclerview-v7:25.3.1'
+
+    //for the webview
+    compile 'com.android.support:customtabs:25.3.1'
+
     //compile 'com.google.android.gms:play-services-ads:8.4.0'
-    implementation 'com.google.android.gms:play-services-ads:11.0.1'
+    compile 'com.google.android.gms:play-services-ads:11.0.1'
     compile project(path: ':helpers')
    // compile project(path: ':googleadssdk')
     compile project(':library')

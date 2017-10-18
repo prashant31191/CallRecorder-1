@@ -1,9 +1,12 @@
 package com.azapps.listeners;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.telephony.PhoneStateListener;
 import android.telephony.TelephonyManager;
+import android.util.Log;
 
+import com.Utils.App;
 import com.azapps.database.CallLog;
 import com.azapps.database.Database;
 import com.azapps.receivers.MyCallReceiver;
@@ -59,13 +62,22 @@ public class PhoneListener extends PhoneStateListener {
         isWhitelisted.set(Database.isWhitelisted(context, phoneCall.getPhoneNumber()));
     }
 
+    @SuppressLint("LongLogTag")
     @Override
     public void onCallStateChanged(int state, String incomingNumber) {
         super.onCallStateChanged(state, incomingNumber);
 
+        Log.i("==PhoneListener--onCallStateChanged==", "--strMessage--state---" + state);
+        Log.i("==incomingNumber=", "--incomingNumber--" + incomingNumber);
+
+        TelephonyManager telMgr = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
+        Log.i("==incomingNumber=", "--getSimState--"+telMgr.getSimState());
+
+
         switch (state) {
             case TelephonyManager.CALL_STATE_IDLE: // Idle... no call
                 if (isRecording.get()) {
+                    Log.i("==onCallStateChanged=====","---CALL_STATE_IDLE----");
                     RecordCallService.stopRecording(context);
                     phoneCall = null;
                     isRecording.set(false);
@@ -74,9 +86,13 @@ public class PhoneListener extends PhoneStateListener {
             case TelephonyManager.CALL_STATE_OFFHOOK: // Call answered
                 if (isWhitelisted.get()) {
                     isWhitelisted.set(false);
+
+                    Log.i("==onCallStateChanged=====","---CALL_STATE_OFFHOOK--000--");
                     return;
                 }
                 if (!isRecording.get()) {
+
+                    Log.i("==onCallStateChanged=====","---CALL_STATE_OFFHOOK--1111--");
                     isRecording.set(true);
                     // start: Probably not ever usefull
                     if (null == phoneCall)
@@ -92,9 +108,13 @@ public class PhoneListener extends PhoneStateListener {
                 // DO NOT try RECORDING here! Leads to VERY poor quality recordings
                 // I think something is not fully settled with the Incoming phone call when we get CALL_STATE_RINGING
                 // a "SystemClock.sleep(1000);" in the code will allow the incoming call to stabilize and produce a good recording...(as proof of above)
+
+                Log.i("==onCallStateChanged=====","---CALL_STATE_RINGING--000--");
                 if (null == phoneCall)
                     phoneCall = new CallLog();
                 if (!incomingNumber.isEmpty()) {
+
+                    Log.i("==onCallStateChanged=====","---CALL_STATE_RINGING--1111--");
                     phoneCall.setPhoneNumber(incomingNumber);
                     // called here so as not to miss recording part of the conversation in TelephonyManager.CALL_STATE_OFFHOOK
                     isWhitelisted.set(Database.isWhitelisted(context, phoneCall.getPhoneNumber()));

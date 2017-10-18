@@ -231,7 +231,7 @@ public class App extends Application {
         Colorful.config(mContext)
                 .primaryColor(primary)
                 .translucent(false)
-                .dark(true)
+               // .dark(true)
                 .apply();
     }
 
@@ -244,7 +244,7 @@ public class App extends Application {
         Colorful.config(mContext)
                 .accentColor(accent)
                 .translucent(false)
-                .dark(true)
+               // .dark(true)
                 .apply();
     }
     public static void setApplyThemeRuntimeDark(boolean isDark)
