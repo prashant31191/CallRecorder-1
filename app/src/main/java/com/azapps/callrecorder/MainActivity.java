@@ -9,6 +9,7 @@ import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
+import android.provider.Settings;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
@@ -74,31 +75,32 @@ public class MainActivity extends ColorfulActivity implements RecordingFragment.
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        try {
+            setContentView(R.layout.activity_main);
 
-        checkPermissions();
+            checkPermissions();
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+            Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+            setSupportActionBar(toolbar);
 
-        // Create the adapter that will return a fragment for each of the three
-        // primary sections of the activity.
-        mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
+            // Create the adapter that will return a fragment for each of the three
+            // primary sections of the activity.
+            mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
 
-        // Set up the ViewPager with the sections adapter.
-        mViewPager = (ViewPager) findViewById(R.id.container);
-        mViewPager.setAdapter(mSectionsPagerAdapter);
+            // Set up the ViewPager with the sections adapter.
+            mViewPager = (ViewPager) findViewById(R.id.container);
+            mViewPager.setAdapter(mSectionsPagerAdapter);
 
-        TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
-        tabLayout.setupWithViewPager(mViewPager);
+            TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
+            tabLayout.setupWithViewPager(mViewPager);
 
-        //set up MediaPlayer
-        mediaController = new MediaController(this);
-        mediaPlayer = new MediaPlayer();
-        mediaPlayer.setOnPreparedListener(this);
-        mediaPlayer.setOnCompletionListener(this);
+            //set up MediaPlayer
+            mediaController = new MediaController(this);
+            mediaPlayer = new MediaPlayer();
+            mediaPlayer.setOnPreparedListener(this);
+            mediaPlayer.setOnCompletionListener(this);
 
-        RateMeNowDialog.showRateDialog(this, 10);
+            RateMeNowDialog.showRateDialog(this, 10);
 
 
 
@@ -115,6 +117,12 @@ public class MainActivity extends ColorfulActivity implements RecordingFragment.
         }*/
 
 
+            Settings.System.putInt(getContentResolver(), Settings.System.SOUND_EFFECTS_ENABLED, 1); //To Enable
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
     }
 
     @Override
