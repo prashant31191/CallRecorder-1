@@ -34,6 +34,7 @@
     <color name="colorEdgeEffect">#FF4081</color>
 
     <color name="switch_on">@color/colorAccent</color>
+    <color name="clr_full_tr">#00ffffff</color>
 
 <!--
     <color name="pressed_color">#FF5722</color>
