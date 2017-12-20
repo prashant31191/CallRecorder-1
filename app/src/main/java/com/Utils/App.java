@@ -105,66 +105,8 @@ public class App extends Application {
     static Typeface tf_Regular, tf_Bold;
 
     //Live
-    public static String strBaseHostUrl = "http://cramserver.site/";
-    public static String strBaseUploadedPicUrl = "http://cramserver.site/images/profile/";
+    public static String strBaseHostUrl = "http://asd.site/";
 
-    //Test
-   /* public static String strBaseHostUrl = "http://takeourorder.com/cramstation/";
-    public static String strBaseUploadedPicUrl = "http://takeourorder.com/cramstation/images/profile/";
-*/
-
-
-    public static String APP_USERTYPE = "0"; // user_type = 0 for customer/traveller & user_type = 1 for driver
-    public static String APP_MODE = "1"; // appmode 1 = Live   2=testing
-    public static String APP_PLATFORM = "2"; // platform = 2   passing app platefrom  2 for android
-
-
-    public static String OP_REGISTER = "register";//done
-    public static String OP_LOGIN = "login"; //done
-    public static String OP_CHECKACCOUNTEXIST = "checkaccountexist"; //done
-    public static String OP_LOGINSOCIAL = "loginsocial"; // done
-    public static String OP_FORGOT_PWD = "forgot_pwd"; // done
-
-    public static String OP_GET_ARTICLE_LIST = "get_article_list"; // done
-
-    public static String OP_GETEXECUTIVESUMMERYLIST = "getexecutivesummerylist"; // done
-    public static String OP_GETTOPICALQUIZLIST = "gettopicalquizlist"; // done
-    public static String OP_GETEXECUTIVESUMMERY = "getexecutivesummery"; // done
-    public static String OP_READEXECUTIVESUMMARY = "readexecutivesummary";
-
-    public static String OP_GETFLASHCARDTOPICLIST = "getflashcardtopiclist"; // done
-    public static String OP_GETTOPICALQUIZ = "gettopicalquiz"; // done
-    public static String OP_RESUMETOPICALQUIZ = "resumetopicalquiz"; // done
-    public static String OP_SETTOPICALQUIZANSWER = "settopicalquizanswer"; // w
-    public static String OP_SETEXAMANSWER = "setexamanswer"; // testing
-    public static String OP_EXAM_SIMULATION = "exam_simulation"; // testing
-
-    public static String OP_PERFORMANCE_ANALYTICS = "performance_analytics"; // done
-
-    public static String OP_GETFLASHCARDS = "getflashcards"; // done
-    public static String OP_QUICKSTARTFLASHCARD = "quickstartflashcard"; // done
-    public static String OP_SETFLASHCARDANSWER = "setflashcardanswer"; // done
-    public static String OP_EDITPROFILE = "editprofile"; // testing
-
-
-    public static String OP_VIEW_PROFILE = "viewprofile";
-    public static String OP_NOTI_LIST = "noti_list";
-
-    public static String OP_NOTI_READ = "noti_read";
-    public static String OP_NOTI_DELETE = "noti_delete";
-    public static String OP_CHANGE_PWD = "change_password";
-    public static String OP_PURCHASE = "purchase"; //done--need-re-testing
-    public static String OP_GETPURCHASERATE = "getpurchaserate"; //done--need-re-testing
-    public static String OP_REMINDERSETTING = "remindersetting";
-
-    public static String OP_TESTEXAM = "testexam";
-    public static String OP_UPDATEDEVICEINFO = "updatedeviceinfo"; //done
-
-    public static String OP_GETCOUNTRY = "GetCountry";
-    public static String OP_GETSTATE = "GetState";
-    public static String OP_GETCITY = "GetCity";
-
-    public static String OP_LOGOUT = "logout"; //done
 
 
     @Override
